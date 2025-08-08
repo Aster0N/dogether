@@ -1,0 +1,63 @@
+@use "./variables.scss" as *;
+@use "./fonts.scss" as *;
+
+:root {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 16px;
+  color: $text-l;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $black;
+}
+p {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 16px;
+}
+h1 {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 47px;
+}
+h2 {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 39px;
+}
+h3 {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 33px;
+}
+h4 {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 27px;
+}
+h5 {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 23px;
+}
+h6 {
+  font-family: "s-grotesk-bold", sans-serif;
+  font-size: 19px;
+}
+._small {
+  font-size: 0.9rem;
+}
+._big {
+  font-size: 1.2rem;
+}
+button {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 14px;
+}
+button._btn-large {
+  font-family: "s-grotesk-regular", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+}
