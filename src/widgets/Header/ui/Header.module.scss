@@ -1,0 +1,17 @@
+@use "@/app/styles/variables.scss" as *;
+
+.header {
+  background-color: $darker;
+  border-bottom-left-radius: $br;
+  border-bottom-right-radius: $br;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,11 @@
+@use "@/app/styles/variables.scss" as *;
+
+.footer {
+  background-color: $darker;
+  border-top-left-radius: $br;
+  border-top-right-radius: $br;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
