@@ -1,2 +1,3 @@
 export { default as AppRouter } from "./AppRouter"
-export { default as routes } from "./routes"
+export { privateRoutes, publicRoutes, routePath } from "./routes"
+export type { AvailableRoutes } from "./routes"

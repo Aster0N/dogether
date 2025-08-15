@@ -1,2 +1,4 @@
+export { default as Auth } from "./Auth/ui/Auth"
 export { default as Home } from "./Home/ui/Home"
 export { default as NotFound } from "./NotFound/ui/NotFound"
+export { default as Profile } from "./Profile/ui/Profile"
