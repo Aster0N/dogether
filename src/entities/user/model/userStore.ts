@@ -12,7 +12,7 @@ export const useUserStore = create<UserStore>(set => ({
       },
       isAuth: true,
     }),
-  logout: () =>
+  logout: async () =>
     set({
       user: null,
       isAuth: false,
