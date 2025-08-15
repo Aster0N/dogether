@@ -18,6 +18,9 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 h6,
 ._small,
@@ -53,6 +56,7 @@ h6 {
 }
 button {
   font-size: 14px;
+  cursor: pointer;
 }
 button._btn-large,
 ._btn-large {
