@@ -6,3 +6,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.navLeft,
+.navRight {
+  display: flex;
+  gap: 15px;
+}

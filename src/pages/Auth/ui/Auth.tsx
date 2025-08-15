@@ -6,7 +6,7 @@ const Auth = () => {
   return (
     <>
       <h2>Login</h2>
-      <button className="_large-btn" onClick={() => login()}>
+      <button className="_btn-large" onClick={() => login()}>
         login
       </button>
     </>

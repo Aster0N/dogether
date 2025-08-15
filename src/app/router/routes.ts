@@ -1,11 +1,13 @@
 import { Auth, Home, NotFound, Profile } from "@/pages"
 import React, { type ReactElement } from "react"
 
-export type AvailableRoutes = {
+export type AvailableRoute = {
   path: (typeof routePath)[keyof typeof routePath]
   element: ReactElement
   placeholder: string
-}[]
+}
+
+export type AvailableRoutes = AvailableRoute[]
 
 export const routePath = {
   HOME: "/",
