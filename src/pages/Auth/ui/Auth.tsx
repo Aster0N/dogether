@@ -1,13 +1,15 @@
-import { useUserStore } from "@/entities/user"
+import { LoginForm, RegistrationForm } from "@/features/auth"
+import { useState } from "react"
 
 const Auth = () => {
-  const { login } = useUserStore()
+  const [isLoginForm, setIsLoginForm] = useState(true)
 
   return (
     <>
-      <h2>Login</h2>
-      <button className="_btn-large" onClick={() => login()}>
-        login
+      {isLoginForm && <LoginForm />}
+      {!isLoginForm && <RegistrationForm />}
+      <button onClick={() => setIsLoginForm(!isLoginForm)}>
+        {isLoginForm ? "Not a member?" : "Already have an account?"}
       </button>
     </>
   )
