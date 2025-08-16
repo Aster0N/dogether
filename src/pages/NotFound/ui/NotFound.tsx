@@ -1,3 +1,4 @@
+import { Button } from "@/shared"
 import { useNavigate } from "react-router-dom"
 
 const NotFound = () => {
@@ -11,7 +12,7 @@ const NotFound = () => {
     <>
       <h1>Nope</h1>
       <p>Can't find that page</p>
-      <button onClick={handleRedirect}>go home</button>
+      <Button onClick={handleRedirect}>go home</Button>
     </>
   )
 }

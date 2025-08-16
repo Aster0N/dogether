@@ -38,7 +38,7 @@ const Home = () => {
           </div>
           <div className={cl.buttonWrapper}>
             <button
-              className={`${cl.getStartBtn} _btn-large`}
+              className={cl.getStartBtn}
               onClick={() => redirectUser()}
             >
               get started

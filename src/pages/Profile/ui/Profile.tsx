@@ -1,5 +1,6 @@
 import { routePath } from "@/app/router"
 import { useUserStore } from "@/entities/user"
+import { Button } from "@/shared"
 import { useNavigate } from "react-router-dom"
 
 const Profile = () => {
@@ -16,9 +17,9 @@ const Profile = () => {
   return (
     <>
       <h1>Hello, {user.email}</h1>
-      <button className="_btn-large" onClick={() => userLogout()}>
+      <Button big={true} onClick={() => userLogout()}>
         logout
-      </button>
+      </Button>
     </>
   )
 }

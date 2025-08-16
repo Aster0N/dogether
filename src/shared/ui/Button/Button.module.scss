@@ -1,0 +1,50 @@
+@use "@/app/styles/variables.scss" as *;
+
+.button {
+  cursor: pointer;
+  border-radius: $br-small;
+  padding: 10px 15px;
+  user-select: none;
+
+  outline: none;
+  border: 1px solid $darker;
+  transition: all 0.3s ease-out;
+  background-color: $secondary;
+  color: $text-d;
+
+  &:hover {
+    background-color: $primary;
+  }
+
+  &.btn_dark {
+    background-color: $black;
+    color: $text-l;
+    &:hover {
+      background-color: rgba($darker, 0.4);
+    }
+  }
+
+  &.btn_large {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+
+  &.btn_small {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  &.btn_inline {
+    text-decoration: underline;
+    color: $accent;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+
+    &:hover {
+      color: lighten($accent, 10);
+      background-color: transparent;
+    }
+  }
+}

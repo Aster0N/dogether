@@ -1,13 +1,14 @@
 import { useUserStore } from "@/entities/user"
+import { Button } from "@/shared"
 
 const LoginForm = () => {
   const { login } = useUserStore()
 
   return (
     <div>
-      <button className="_btn-large" onClick={() => login()}>
+      <Button big={true} onClick={() => login()}>
         login
-      </button>
+      </Button>
     </div>
   )
 }

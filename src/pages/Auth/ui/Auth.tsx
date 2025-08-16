@@ -1,4 +1,5 @@
 import { LoginForm, RegistrationForm } from "@/features/auth"
+import { Button } from "@/shared"
 import { useState } from "react"
 
 const Auth = () => {
@@ -6,11 +7,14 @@ const Auth = () => {
 
   return (
     <>
-      {isLoginForm && <LoginForm />}
-      {!isLoginForm && <RegistrationForm />}
-      <button onClick={() => setIsLoginForm(!isLoginForm)}>
+      {isLoginForm ? <LoginForm /> : <RegistrationForm />}
+      <Button
+        big={false}
+        inline={true}
+        onClick={() => setIsLoginForm(!isLoginForm)}
+      >
         {isLoginForm ? "Not a member?" : "Already have an account?"}
-      </button>
+      </Button>
     </>
   )
 }
