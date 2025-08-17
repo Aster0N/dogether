@@ -1,0 +1,17 @@
+@use "@/app/styles/variables.scss" as *;
+
+.auth_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .auth_content {
+    border: 1px solid $accent;
+    border-radius: $br;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

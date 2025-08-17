@@ -1,0 +1,27 @@
+@use "@/app/styles/variables.scss" as *;
+
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    transform: translateY(10px);
+    transition: transform 0.2s ease;
+
+    &.focused {
+      color: $red;
+      transform: translateY(0);
+    }
+  }
+
+  .input {
+    width: 250px;
+    padding: 5px 15px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $primary;
+    color: $text-l;
+    font-size: 16px;
+  }
+}

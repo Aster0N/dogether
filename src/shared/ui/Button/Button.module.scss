@@ -35,6 +35,7 @@
   }
 
   &.btn_inline {
+    width: fit-content;
     text-decoration: underline;
     color: $accent;
     border: none;
