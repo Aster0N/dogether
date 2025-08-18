@@ -12,6 +12,10 @@ const RegistrationForm = () => {
     e.preventDefault()
   }
 
+  const handleSelectValueChange = (value: string) => {
+    setUserSex(value)
+  }
+
   return (
     <div>
       <h2 className={cl.header}>Registration</h2>
@@ -38,7 +42,13 @@ const RegistrationForm = () => {
             required
             onChange={e => setConfirmPasswordValue(e.target.value)}
           />
-          <Select options={userSexOptions} valueLabel="sex" className={cl.select} />
+          <Select
+            options={userSexOptions}
+            valueLabel="sex"
+            value={userSex}
+            className={cl.select}
+            onChange={handleSelectValueChange}
+          />
         </div>
         <Button type="submit" big>
           sign up
