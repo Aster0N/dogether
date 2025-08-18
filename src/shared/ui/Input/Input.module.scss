@@ -1,6 +1,6 @@
 @use "@/app/styles/variables.scss" as *;
 
-.input_wrapper {
+.input_block_wrapper {
   display: flex;
   flex-direction: column;
 
@@ -14,14 +14,24 @@
     }
   }
 
-  .input {
-    width: 250px;
-    padding: 5px 15px;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid $primary;
-    color: $text-l;
-    font-size: 16px;
+  .input_wrapper {
+    position: relative;
+
+    .input {
+      width: 250px;
+      padding: 5px 25px 5px 15px;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $primary;
+      color: $text-l;
+      font-size: 16px;
+    }
+
+    .show_password {
+      position: absolute;
+      right: 0px;
+      bottom: 3px;
+    }
   }
 }

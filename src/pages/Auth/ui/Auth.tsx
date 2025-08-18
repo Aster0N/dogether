@@ -10,11 +10,7 @@ const Auth = () => {
     <div className={cl.auth_wrapper}>
       <div className={cl.auth_content}>
         {isLoginForm ? <LoginForm /> : <RegistrationForm />}
-        <Button
-          big={false}
-          inline={true}
-          onClick={() => setIsLoginForm(!isLoginForm)}
-        >
+        <Button big={false} inline onClick={() => setIsLoginForm(!isLoginForm)}>
           {isLoginForm ? "Not a member?" : "Already have an account?"}
         </Button>
       </div>
