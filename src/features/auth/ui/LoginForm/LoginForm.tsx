@@ -22,12 +22,14 @@ const LoginForm = () => {
             type="email"
             label="email"
             value={inputValue}
+            required
             onChange={e => setInputValue(e.target.value)}
           />
           <Input
             type="password"
             label="password"
             value={passwordValue}
+            required
             onChange={e => setPasswordValue(e.target.value)}
           />
         </div>

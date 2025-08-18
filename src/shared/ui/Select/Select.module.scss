@@ -1,0 +1,49 @@
+@use "@/app/styles/variables.scss" as *;
+
+.select_wrapper {
+  position: relative;
+
+  .select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: $text-l;
+    font-size: 16px;
+    width: 100%;
+    padding: 5px 30px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $primary;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    user-select: none;
+
+    &:hover {
+      border-color: #9a9a9a;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .option {
+      padding: 10px;
+      background-color: $darker;
+      color: $text-l;
+      cursor: pointer;
+    }
+  }
+
+  .select:open + .arrow {
+    transform: rotate(180deg);
+  }
+
+  .arrow {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: rotate(0);
+    pointer-events: none;
+    transition: transform 0.2s ease;
+  }
+}

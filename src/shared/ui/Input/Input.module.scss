@@ -7,9 +7,10 @@
   .label {
     transform: translateY(10px);
     transition: transform 0.2s ease;
+    padding-left: 10px;
 
     &.focused {
-      color: $red;
+      color: #8f8f8f;
       transform: translateY(0);
     }
   }
@@ -18,8 +19,8 @@
     position: relative;
 
     .input {
-      width: 250px;
-      padding: 5px 25px 5px 15px;
+      width: 20vw;
+      padding: 5px 25px 5px 10px;
       background-color: transparent;
       outline: none;
       border: none;
@@ -30,7 +31,7 @@
 
     .show_password {
       position: absolute;
-      right: 0px;
+      right: 10px;
       bottom: 3px;
     }
   }
