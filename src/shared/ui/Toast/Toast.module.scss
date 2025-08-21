@@ -1,0 +1,21 @@
+@use "@/app/styles/variables.scss" as *;
+
+.toast {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: $br;
+  background-color: $darker;
+  border: 1px solid $primary;
+  color: $text-l;
+  z-index: 10;
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    border: 1px solid $red;
+  }
+}

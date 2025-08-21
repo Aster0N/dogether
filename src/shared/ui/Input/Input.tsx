@@ -8,7 +8,7 @@ interface Input extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
 }
 
-const Input: FC<Input> = ({ type, label, value, onChange }) => {
+const Input: FC<Input> = ({ type, label, value, name, onChange }) => {
   const inputId = `${useId()}`
   const [isFocused, setIsFocused] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -38,6 +38,7 @@ const Input: FC<Input> = ({ type, label, value, onChange }) => {
           onFocus={onFocus}
           onBlur={onBlur}
           value={value}
+					name={name}
           onChange={onChange}
         />
         {type == "password" && (

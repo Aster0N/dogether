@@ -1,26 +1,33 @@
-import { useUserStore } from "@/entities/user"
-import { Button, Input } from "@/shared"
-import { useState } from "react"
+import { Button, Input, Toast } from "@/shared"
+import { useActionState, useEffect, useState } from "react"
+import { initialStatusState, userSignIn } from "../../model/userSignIn"
 import cl from "./LoginForm.module.scss"
 
 const LoginForm = () => {
-  const { login } = useUserStore()
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("a@a.a")
   const [passwordValue, setPasswordValue] = useState("")
+  const [loginStatus, formAction, isPending] = useActionState(
+    userSignIn,
+    initialStatusState
+  )
+  const [showToast, setShowToast] = useState(false)
 
-  const userLogIn = (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    login()
-  }
+  useEffect(() => {
+    if (loginStatus.submitted) {
+      setShowToast(true)
+      loginStatus.submitted = false
+    }
+  }, [loginStatus.submitted])
 
   return (
     <div>
       <h2 className={cl.header}>Login</h2>
-      <form onSubmit={userLogIn}>
+      <form action={formAction}>
         <div className={cl.form_content}>
           <Input
             type="email"
             label="email"
+            name="user_email"
             value={inputValue}
             required
             onChange={e => setInputValue(e.target.value)}
@@ -28,15 +35,23 @@ const LoginForm = () => {
           <Input
             type="password"
             label="password"
+            name="user_password"
             value={passwordValue}
             required
             onChange={e => setPasswordValue(e.target.value)}
           />
         </div>
         <Button type="submit" big>
-          sign in
+          {isPending ? "wait..." : "sign in"}
         </Button>
       </form>
+      {showToast && (
+        <Toast
+          onClose={() => setShowToast(false)}
+          isSuccessCode={!loginStatus.isAnyErrors}
+          messages={{ valid: "success", invalid: "try again" }}
+        />
+      )}
     </div>
   )
 }
