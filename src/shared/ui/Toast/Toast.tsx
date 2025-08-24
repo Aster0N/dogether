@@ -11,8 +11,6 @@ interface Toast {
   }
 }
 
-// TODO make a state (mb zustand store) for queuing toasts
-
 const Toast: FC<Toast> = ({ isSuccessCode, messages, onClose }) => {
   const [isExpired, setIsExpired] = useState(false)
   const lifeTime = 3000

@@ -6,9 +6,20 @@ import cl from "./Input.module.scss"
 
 interface Input extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
+  name?: InputNames
+  error?: string
 }
+export type InputNames = "email" | "password"
 
-const Input: FC<Input> = ({ type, label, value, name, onChange }) => {
+const Input: FC<Input> = ({
+  type,
+  label,
+  value,
+  name,
+  error,
+  required = true,
+  onChange,
+}) => {
   const inputId = `${useId()}`
   const [isFocused, setIsFocused] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -38,9 +49,11 @@ const Input: FC<Input> = ({ type, label, value, name, onChange }) => {
           onFocus={onFocus}
           onBlur={onBlur}
           value={value}
-					name={name}
+          name={name}
+          required={required}
           onChange={onChange}
         />
+        {error && <div>{error}</div>}
         {type == "password" && (
           <Button
             inline

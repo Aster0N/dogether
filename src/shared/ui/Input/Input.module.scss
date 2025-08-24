@@ -8,9 +8,9 @@
     transform: translateY(10px);
     transition: transform 0.2s ease;
     padding-left: 10px;
+    color: #8f8f8f;
 
     &.focused {
-      color: #8f8f8f;
       transform: translateY(0);
     }
   }
@@ -32,7 +32,7 @@
     .show_password {
       position: absolute;
       right: 10px;
-      bottom: 3px;
+      top: 3px;
     }
   }
 }

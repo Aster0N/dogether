@@ -1,0 +1,25 @@
+import { z } from "zod/mini"
+import type { LoginFormFieldValues } from "../types/loginFormTypes"
+
+export const loginSchema = z.object({
+  email: z.email({ error: "Incorrect email address" }),
+  password: z
+    .string()
+    .check(z.minLength(6, { error: "Must be at least 6 symbols" })),
+})
+
+export interface ValidateLoginForm {
+  (data: LoginFormFieldValues): {
+    success: boolean
+    error?: z.core.$ZodError
+  }
+}
+
+export const validateLoginForm: ValidateLoginForm = data => {
+  const result = loginSchema.safeParse(data)
+
+  if (result.success) {
+    return { success: true }
+  }
+  return { success: false, error: result.error }
+}
