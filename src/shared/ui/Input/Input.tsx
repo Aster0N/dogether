@@ -1,4 +1,4 @@
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Info } from "lucide-react"
 import type { FC, InputHTMLAttributes } from "react"
 import { useId, useState } from "react"
 import Button from "../Button/Button"
@@ -53,7 +53,12 @@ const Input: FC<Input> = ({
           required={required}
           onChange={onChange}
         />
-        {error && <div>{error}</div>}
+        {error && (
+          <div className={`_small ${cl.validation_error}`}>
+            <Info size={18} color="#d52650" />
+            <span>{error}</span>
+          </div>
+        )}
         {type == "password" && (
           <Button
             inline
