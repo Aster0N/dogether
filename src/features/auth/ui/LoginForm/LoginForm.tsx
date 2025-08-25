@@ -25,6 +25,7 @@ const LoginForm = () => {
       isDirty: false,
     },
   })
+  const [isFormValid, setIsFormValid] = useState(false)
 
   const [loginStatus, formAction, isPending] = useActionState(
     userSignIn,
@@ -39,6 +40,7 @@ const LoginForm = () => {
   }, [loginStatus.submitted])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsFormValid(false)
     const name = event.target.name as InputNames
     const value = event.target.value
 
@@ -59,6 +61,10 @@ const LoginForm = () => {
       email: email.value,
       password: password.value,
     })
+
+    if (validationResult.success) {
+      setIsFormValid(true)
+    }
 
     if (!validationResult.success && validationResult.error?.issues) {
       const errors = grabLoginFormErrors(validationResult, [email, password])
@@ -95,7 +101,7 @@ const LoginForm = () => {
             onChange={handleChange}
           />
         </div>
-        <Button type="submit" big>
+        <Button type="submit" disabled={!isFormValid} big>
           {isPending ? "wait..." : "sign in"}
         </Button>
       </form>
