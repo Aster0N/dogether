@@ -1,6 +1,6 @@
-import { Button, Input, Toast } from "@/shared"
+import { Button, Input, Toast, useToastOpenTrigger } from "@/shared"
 import type { InputNames } from "@/shared/ui/Input/Input"
-import { useActionState, useEffect, useState } from "react"
+import { useActionState, useState } from "react"
 import { grabLoginFormErrors } from "../../lib/grabLoginFormErrors"
 import {
   initialLoginFormDataState,
@@ -17,17 +17,13 @@ const LoginForm = () => {
     userSignIn,
     initialStatusState
   )
-  const [showToast, setShowToast] = useState(false)
-
-  useEffect(() => {
-    if (loginStatus.submitted) {
-      setShowToast(true)
-      loginStatus.submitted = false
-    }
-  }, [loginStatus.submitted])
+  const { showToast, onToastClose } = useToastOpenTrigger(loginStatus.submitted)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsFormValid(false)
+    if (loginStatus.submitted) {
+      loginStatus.submitted = false
+    }
     const name = event.target.name as InputNames
     const value = event.target.value
 
@@ -89,7 +85,7 @@ const LoginForm = () => {
       </form>
       {showToast && (
         <Toast
-          onClose={() => setShowToast(false)}
+          onClose={onToastClose}
           isSuccessCode={loginStatus.success}
           messages={{ valid: "success", invalid: "try again" }}
         />
