@@ -1,5 +1,6 @@
 import type { InputNames } from "@/shared/ui/Input/Input"
-import type { LoginFormData, ValidationResult } from "../types/loginFormTypes"
+import type { LoginFormData } from "../types/loginFormTypes"
+import type { ZodValidationResult } from "../types/types"
 import { grabLoginFormErrors } from "./grabLoginFormErrors"
 import { validateLoginForm } from "./loginSchema"
 
@@ -32,7 +33,7 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
     },
   }
 
-  const validationResult: ValidationResult = validateLoginForm({
+  const validationResult: ZodValidationResult = validateLoginForm({
     email: updatedData.email.value,
     password: updatedData.password.value,
   })

@@ -1,12 +1,9 @@
 import { z } from "zod/mini"
-import type {
-  FieldData,
-  LoginFormFields,
-  ValidationResult,
-} from "../types/loginFormTypes"
+import type { LoginFormFields } from "../types/loginFormTypes"
+import type { FieldData, ZodValidationResult } from "../types/types"
 
 export interface GrabLoginFormErrors {
-  (validationResult: ValidationResult, formFields: FieldData[]): Record<
+  (validationResult: ZodValidationResult, formFields: FieldData[]): Record<
     LoginFormFields,
     string
   >
