@@ -1,4 +1,4 @@
-import type { ValidateLoginForm } from "../lib/loginSchema"
+import type { ValidateForm } from "../lib/loginSchema"
 import type { LoginFormFields } from "./loginFormTypes"
 
 export type FormStatus = {
@@ -14,4 +14,4 @@ export type FieldData = {
   error: string
   isDirty: boolean
 }
-export type ZodValidationResult = ReturnType<ValidateLoginForm>
+export type ZodValidationResult = ReturnType<ValidateForm>

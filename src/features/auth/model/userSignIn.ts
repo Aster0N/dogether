@@ -1,5 +1,6 @@
 import { sleep } from "@/shared"
-import type { FormStatus, LoginFormFields } from "../types/loginFormTypes"
+import type { LoginFormFields } from "../types/loginFormTypes"
+import type { FormStatus } from "../types/types"
 
 export const initialStatusState: FormStatus = {
   success: false,

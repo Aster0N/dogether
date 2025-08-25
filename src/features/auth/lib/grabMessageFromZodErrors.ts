@@ -2,21 +2,20 @@ import { z } from "zod/mini"
 import type { LoginFormFields } from "../types/loginFormTypes"
 import type { FieldData, ZodValidationResult } from "../types/types"
 
-export interface GrabLoginFormErrors {
+export interface GrabMessageFromZodErrors {
   (validationResult: ZodValidationResult, formFields: FieldData[]): Record<
-    LoginFormFields,
+    LoginFormFields, // | RegistrationFormFields
     string
   >
 }
 
-// TODO make it <versatile> for registration
-export const grabLoginFormErrors: GrabLoginFormErrors = (
+export const grabMessageFromZodErrors: GrabMessageFromZodErrors = (
   validationResult,
   formFields
 ) => {
   const validationError = validationResult.error as z.core.$ZodError
-  const errors = {} as Record<LoginFormFields, string>
-  const fieldsDirty = {} as Record<LoginFormFields, boolean>
+  const errors = {} as Record<LoginFormFields, string> // | RegistrationFormFields
+  const fieldsDirty = {} as Record<LoginFormFields, boolean> // | RegistrationFormFields
 
   formFields.forEach(field => {
     errors[field.name] = ""

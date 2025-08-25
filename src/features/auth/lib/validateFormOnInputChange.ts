@@ -1,8 +1,9 @@
 import type { InputNames } from "@/shared/ui/Input/Input"
 import type { LoginFormData } from "../types/loginFormTypes"
 import type { ZodValidationResult } from "../types/types"
-import { grabLoginFormErrors } from "./grabLoginFormErrors"
-import { validateLoginForm } from "./loginSchema"
+import { grabMessageFromZodErrors } from "./grabMessageFromZodErrors"
+import { loginSchema } from "./loginSchema"
+import { validateForm } from "./validateForm"
 
 type InputValidationResult = {
   isFormValid: boolean
@@ -33,10 +34,13 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
     },
   }
 
-  const validationResult: ZodValidationResult = validateLoginForm({
-    email: updatedData.email.value,
-    password: updatedData.password.value,
-  })
+  const validationResult: ZodValidationResult = validateForm(
+    {
+      email: updatedData.email.value,
+      password: updatedData.password.value,
+    },
+    loginSchema
+  )
 
   if (validationResult.success) {
     return {
@@ -45,7 +49,7 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
     }
   }
 
-  const errors = grabLoginFormErrors(validationResult, [
+  const errors = grabMessageFromZodErrors(validationResult, [
     updatedData.email,
     updatedData.password,
   ])

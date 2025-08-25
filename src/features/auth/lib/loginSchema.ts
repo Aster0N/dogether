@@ -1,8 +1,5 @@
 import { z } from "zod/mini"
-import type {
-  LoginFormData,
-  LoginFormFieldValues,
-} from "../types/loginFormTypes"
+import type { LoginFormData } from "../types/loginFormTypes"
 
 export const loginSchema = z.object({
   email: z.email({ error: "Incorrect email address" }),
@@ -26,20 +23,4 @@ export const initialLoginFormDataState: LoginFormData = {
     error: "",
     isDirty: false,
   },
-}
-
-export interface ValidateLoginForm {
-  (data: LoginFormFieldValues): {
-    success: boolean
-    error?: z.core.$ZodError
-  }
-}
-// TODO pass here form schema as z.ZodMiniObject
-export const validateLoginForm: ValidateLoginForm = data => {
-  const result = loginSchema.safeParse(data)
-
-  if (result.success) {
-    return { success: true }
-  }
-  return { success: false, error: result.error }
 }
