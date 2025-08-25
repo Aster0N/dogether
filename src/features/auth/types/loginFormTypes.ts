@@ -1,6 +1,6 @@
 import type { ValidateLoginForm } from "../lib/loginSchema"
 
-export type LoginFormStatus = {
+export type FormStatus = {
   success: boolean
   submitted: boolean
 }

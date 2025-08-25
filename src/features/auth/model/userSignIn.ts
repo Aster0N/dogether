@@ -1,7 +1,7 @@
 import { sleep } from "@/shared"
-import type { LoginFormFields, LoginFormStatus } from "../types/loginFormTypes"
+import type { FormStatus, LoginFormFields } from "../types/loginFormTypes"
 
-export const initialStatusState: LoginFormStatus = {
+export const initialStatusState: FormStatus = {
   success: false,
   submitted: false,
 }
@@ -9,15 +9,15 @@ export const initialStatusState: LoginFormStatus = {
 const postData = async (
   email: string,
   password: string
-): Promise<LoginFormStatus> => {
+): Promise<FormStatus> => {
   await sleep(1500)
   return { success: true, submitted: true }
 }
 
 export const userSignIn = async (
-  prevState: LoginFormStatus,
+  prevState: FormStatus,
   formData: FormData
-): Promise<LoginFormStatus> => {
+): Promise<FormStatus> => {
   const emailData: LoginFormFields = "email"
   const passwordData: LoginFormFields = "password"
 

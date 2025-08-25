@@ -7,7 +7,10 @@ import {
   validateLoginForm,
 } from "../../lib/loginSchema"
 import { initialStatusState, userSignIn } from "../../model/userSignIn"
-import type { ValidationResult } from "../../types/loginFormTypes"
+import type {
+  LoginFormData,
+  ValidationResult,
+} from "../../types/loginFormTypes"
 import cl from "./LoginForm.module.scss"
 
 const LoginForm = () => {
@@ -19,15 +22,13 @@ const LoginForm = () => {
   )
   const { showToast, onToastClose } = useToastOpenTrigger(loginStatus.submitted)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsFormValid(false)
-    if (loginStatus.submitted) {
-      loginStatus.submitted = false
-    }
+    loginStatus.submitted = false
     const name = event.target.name as InputNames
     const value = event.target.value
 
-    const updatedData = {
+    const updatedData: LoginFormData = {
       ...formData,
       [name]: {
         ...formData[name],
@@ -75,7 +76,7 @@ const LoginForm = () => {
               name={field.name}
               value={field.value}
               error={field.error}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
           ))}
         </div>

@@ -34,7 +34,7 @@ export interface ValidateLoginForm {
     error?: z.core.$ZodError
   }
 }
-
+// TODO pass here form schema as z.ZodMiniObject
 export const validateLoginForm: ValidateLoginForm = data => {
   const result = loginSchema.safeParse(data)
 

@@ -24,6 +24,7 @@
 
     &:focus {
       outline: none;
+      border-bottom: 1px solid $accent-light;
     }
 
     .option {
@@ -40,7 +41,7 @@
 
   .arrow {
     position: absolute;
-    top: 35%;
+    top: 40%;
     right: 10px;
     transform: rotate(0);
     pointer-events: none;
