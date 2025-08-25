@@ -4,6 +4,7 @@ export type FormStatus = {
   success: boolean
   submitted: boolean
 }
+// mb change to ZODValidationResult
 export type ValidationResult = ReturnType<ValidateLoginForm>
 export type LoginFormFields = "email" | "password"
 export type FieldData = {

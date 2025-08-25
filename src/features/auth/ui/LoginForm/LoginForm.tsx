@@ -1,16 +1,8 @@
 import { Button, Input, Toast, useToastOpenTrigger } from "@/shared"
-import type { InputNames } from "@/shared/ui/Input/Input"
 import { useActionState, useState } from "react"
-import { grabLoginFormErrors } from "../../lib/grabLoginFormErrors"
-import {
-  initialLoginFormDataState,
-  validateLoginForm,
-} from "../../lib/loginSchema"
+import { initialLoginFormDataState } from "../../lib/loginSchema"
+import { validateFormOnInputChange } from "../../lib/validateFormOnInputChange"
 import { initialStatusState, userSignIn } from "../../model/userSignIn"
-import type {
-  LoginFormData,
-  ValidationResult,
-} from "../../types/loginFormTypes"
 import cl from "./LoginForm.module.scss"
 
 const LoginForm = () => {
@@ -21,46 +13,13 @@ const LoginForm = () => {
     initialStatusState
   )
   const { showToast, onToastClose } = useToastOpenTrigger(loginStatus.submitted)
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsFormValid(false)
-    loginStatus.submitted = false
-    const name = event.target.name as InputNames
-    const value = event.target.value
-
-    const updatedData: LoginFormData = {
-      ...formData,
-      [name]: {
-        ...formData[name],
-        value,
-        error: "",
-        isDirty: true,
-      },
-    }
-
-    setFormData(updatedData)
-
-    const { email, password } = updatedData
-    const validationResult: ValidationResult = validateLoginForm({
-      email: email.value,
-      password: password.value,
-    })
-
-    if (validationResult.success) {
-      setIsFormValid(true)
-    }
-
-    if (!validationResult.success && validationResult.error?.issues) {
-      const errors = grabLoginFormErrors(validationResult, [email, password])
-
-      setFormData(prev => ({
-        ...prev,
-        [name]: {
-          ...prev[name],
-          error: errors[name],
-        },
-      }))
-    }
+    const { isFormValid, updatedFormData } = validateFormOnInputChange(
+      event,
+      formData
+    )
+    setIsFormValid(isFormValid)
+    setFormData(updatedFormData)
   }
 
   return (
