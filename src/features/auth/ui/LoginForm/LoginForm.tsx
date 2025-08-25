@@ -2,36 +2,23 @@ import { Button, Input, Toast } from "@/shared"
 import type { InputNames } from "@/shared/ui/Input/Input"
 import { useActionState, useEffect, useState } from "react"
 import { grabLoginFormErrors } from "../../lib/grabLoginFormErrors"
-import { validateLoginForm } from "../../lib/loginSchema"
+import {
+  initialLoginFormDataState,
+  validateLoginForm,
+} from "../../lib/loginSchema"
 import { initialStatusState, userSignIn } from "../../model/userSignIn"
-import type {
-  LoginFormData,
-  ValidationResult,
-} from "../../types/loginFormTypes"
+import type { ValidationResult } from "../../types/loginFormTypes"
 import cl from "./LoginForm.module.scss"
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState<LoginFormData>({
-    email: {
-      name: "email",
-      value: "",
-      error: "",
-      isDirty: false,
-    },
-    password: {
-      name: "password",
-      value: "",
-      error: "",
-      isDirty: false,
-    },
-  })
+  const [formData, setFormData] = useState(initialLoginFormDataState)
   const [isFormValid, setIsFormValid] = useState(false)
-
   const [loginStatus, formAction, isPending] = useActionState(
     userSignIn,
     initialStatusState
   )
   const [showToast, setShowToast] = useState(false)
+
   useEffect(() => {
     if (loginStatus.submitted) {
       setShowToast(true)
@@ -84,25 +71,20 @@ const LoginForm = () => {
       <h2 className={cl.header}>Login</h2>
       <form action={formAction}>
         <div className={cl.form_content}>
-          <Input
-            type="email"
-            label="email"
-            name="email"
-            value={formData.email.value}
-            error={formData.email.error}
-            onChange={handleChange}
-          />
-          <Input
-            type="password"
-            label="password"
-            name="password"
-            value={formData.password.value}
-            error={formData.password.error}
-            onChange={handleChange}
-          />
+          {Object.values(formData).map(field => (
+            <Input
+              key={field.name}
+              type={field.type}
+              label={field.label ?? field.name}
+              name={field.name}
+              value={field.value}
+              error={field.error}
+              onChange={handleChange}
+            />
+          ))}
         </div>
         <Button type="submit" disabled={!isFormValid} big>
-          {isPending ? "wait..." : "sign in"}
+          {isPending ? "submitting..." : "sign in"}
         </Button>
       </form>
       {showToast && (

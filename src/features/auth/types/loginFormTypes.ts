@@ -8,6 +8,8 @@ export type ValidationResult = ReturnType<ValidateLoginForm>
 export type LoginFormFields = "email" | "password"
 export type FieldData = {
   name: LoginFormFields
+  label?: string
+  type: React.HTMLInputTypeAttribute
   value: string
   error: string
   isDirty: boolean
