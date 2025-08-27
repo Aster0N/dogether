@@ -1,4 +1,4 @@
-import type { ValidateForm } from "../lib/loginSchema"
+import type { ValidateForm } from "../lib/validateForm"
 import type { LoginFormFields } from "./loginFormTypes"
 
 export type FormStatus = {
