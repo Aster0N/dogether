@@ -1,10 +1,10 @@
+import type { InputNames } from "@/shared/ui/Input/Input"
 import { z } from "zod/mini"
-import type { LoginFormFields } from "../types/loginFormTypes"
 import type { FieldData, ZodValidationResult } from "../types/types"
 
 export interface GrabMessageFromZodErrors {
   (validationResult: ZodValidationResult, formFields: FieldData[]): Record<
-    LoginFormFields, // | RegistrationFormFields
+    InputNames,
     string
   >
 }
@@ -14,8 +14,8 @@ export const grabMessageFromZodErrors: GrabMessageFromZodErrors = (
   formFields
 ) => {
   const validationError = validationResult.error as z.core.$ZodError
-  const errors = {} as Record<LoginFormFields, string> // | RegistrationFormFields
-  const fieldsDirty = {} as Record<LoginFormFields, boolean> // | RegistrationFormFields
+  const errors = {} as Record<InputNames, string>
+  const fieldsDirty = {} as Record<InputNames, boolean>
 
   formFields.forEach(field => {
     errors[field.name] = ""

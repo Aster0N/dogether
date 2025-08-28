@@ -1,8 +1,8 @@
 import { Button, Input, Toast, useToastOpenTrigger } from "@/shared"
 import { useActionState, useState } from "react"
-import { initialLoginFormDataState } from "../../lib/loginSchema"
+import { initialLoginFormDataState, loginSchema } from "../../lib/loginSchema"
 import { validateFormOnInputChange } from "../../lib/validateFormOnInputChange"
-import { initialStatusState, userSignIn } from "../../model/userSignIn"
+import { initialStatusState, userSignIn } from "../../model/userAuth"
 import cl from "./LoginForm.module.scss"
 
 const LoginForm = () => {
@@ -16,7 +16,8 @@ const LoginForm = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { isFormValid, updatedFormData } = validateFormOnInputChange(
       event,
-      formData
+      formData,
+      loginSchema
     )
     setIsFormValid(isFormValid)
     setFormData(updatedFormData)
@@ -44,11 +45,7 @@ const LoginForm = () => {
         </Button>
       </form>
       {showToast && (
-        <Toast
-          onClose={onToastClose}
-          isSuccessCode={loginStatus.success}
-          messages={{ valid: "success", invalid: "try again" }}
-        />
+        <Toast onClose={onToastClose} isSuccessCode={loginStatus.success} />
       )}
     </div>
   )

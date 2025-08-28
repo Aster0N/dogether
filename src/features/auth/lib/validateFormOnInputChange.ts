@@ -1,30 +1,32 @@
 import type { InputNames } from "@/shared/ui/Input/Input"
-import type { LoginFormData } from "../types/loginFormTypes"
-import type { ZodValidationResult } from "../types/types"
+import { z } from "zod"
+import type { ZodMiniObject } from "zod/mini"
+import type { FieldData, FormData, ZodValidationResult } from "../types/types"
 import { grabMessageFromZodErrors } from "./grabMessageFromZodErrors"
-import { loginSchema } from "./loginSchema"
 import { validateForm } from "./validateForm"
 
-type InputValidationResult = {
+type InputValidationResult<T extends InputNames> = {
   isFormValid: boolean
-  updatedFormData: LoginFormData
+  updatedFormData: FormData<T>
 }
 
 interface ValidateFormOnInputChange {
-  (
+  <T extends InputNames>(
     event: React.ChangeEvent<HTMLInputElement>,
-    formData: LoginFormData
-  ): InputValidationResult
+    formData: FormData<T>,
+    schema: z.ZodObject | ZodMiniObject
+  ): InputValidationResult<T>
 }
 
 export const validateFormOnInputChange: ValidateFormOnInputChange = (
   event,
-  formData
+  formData,
+  schema
 ) => {
-  const name = event.target.name as InputNames
+  const name = event.target.name as keyof typeof formData
   const value = event.target.value
 
-  const updatedData: LoginFormData = {
+  const updatedData = {
     ...formData,
     [name]: {
       ...formData[name],
@@ -32,15 +34,16 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
       error: "",
       isDirty: true,
     },
-  }
+  } as FormData<typeof name>
 
-  const validationResult: ZodValidationResult = validateForm(
-    {
-      email: updatedData.email.value,
-      password: updatedData.password.value,
-    },
-    loginSchema
-  )
+  const formValues = Object.fromEntries(
+    Object.entries(updatedData).map(([key, field]) => [
+      key,
+      (field as FieldData).value,
+    ])
+  ) as Record<InputNames, string>
+
+  const validationResult: ZodValidationResult = validateForm(formValues, schema)
 
   if (validationResult.success) {
     return {
@@ -49,20 +52,18 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
     }
   }
 
-  const errors = grabMessageFromZodErrors(validationResult, [
-    updatedData.email,
-    updatedData.password,
-  ])
+  const errors = grabMessageFromZodErrors(
+    validationResult,
+    Object.values(updatedData)
+  )
 
   return {
     isFormValid: false,
     updatedFormData: {
-      ...formData,
+      ...updatedData,
       [name]: {
-        ...formData[name],
-        value,
-        error: errors[name],
-        isDirty: true,
+        ...updatedData[name],
+        error: errors[name] || "",
       },
     },
   }

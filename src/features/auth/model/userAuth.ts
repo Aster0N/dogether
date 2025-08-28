@@ -15,6 +15,21 @@ const postData = async (
   return { success: true, submitted: true }
 }
 
+export const userSignUp = async (
+  prevState: FormStatus,
+  formData: FormData
+): Promise<FormStatus> => {
+  const emailData: LoginFormFields = "email"
+  const passwordData: LoginFormFields = "password"
+
+  const email = formData.get(emailData) as string
+  const password = formData.get(passwordData) as string
+  // grab sex value from select
+
+  const status = postData(email, password)
+  return status
+}
+
 export const userSignIn = async (
   prevState: FormStatus,
   formData: FormData

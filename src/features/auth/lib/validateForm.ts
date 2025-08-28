@@ -1,9 +1,12 @@
-import type { z } from "zod/mini"
-import type { LoginFormFieldValues } from "../types/loginFormTypes"
+import type { InputNames } from "@/shared/ui/Input/Input"
+import type { z } from "zod"
+import type { ZodMiniObject } from "zod/mini"
 
 export interface ValidateForm {
-  // data: LoginFormFieldValues | RegistrationFormValues
-  (data: LoginFormFieldValues, zodSchema: z.ZodMiniObject): {
+  <T extends Record<InputNames, string>>(
+    data: T,
+    zodSchema: z.ZodObject | ZodMiniObject
+  ): {
     success: boolean
     error?: z.core.$ZodError
   }
