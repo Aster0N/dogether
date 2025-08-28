@@ -5,13 +5,19 @@ import cl from "./Toast.module.scss"
 interface Toast {
   isSuccessCode: boolean
   onClose: () => void
-  messages: {
+  messages?: {
     valid: string
     invalid: string
   }
 }
 
-const Toast: FC<Toast> = ({ isSuccessCode, messages, onClose }) => {
+const defaultMessage = { valid: "success", invalid: "try again" }
+
+const Toast: FC<Toast> = ({
+  isSuccessCode,
+  messages = defaultMessage,
+  onClose,
+}) => {
   const [isExpired, setIsExpired] = useState(false)
   const lifeTime = 3000
 

@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react"
+//? import { ChevronDown } from "lucide-react"
 import { useId, type FC } from "react"
 import cl from "./Select.module.scss"
 
@@ -47,7 +47,8 @@ const Select: FC<Select> = ({
           </option>
         ))}
       </select>
-      <ChevronDown size={18} color="#20927b" className={cl.arrow} />
+      {/* <ChevronDown size={18} color="#20927b" className={cl.arrow} /> */}
+      <img src="/chevron-down.svg" alt="select" className={cl.arrow} />
     </div>
   )
 }

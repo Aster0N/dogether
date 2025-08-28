@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Info } from "lucide-react"
+//? import { Eye, EyeOff, Info } from "lucide-react"
 import type { FC, InputHTMLAttributes } from "react"
 import { useId, useState } from "react"
 import Button from "../Button/Button"
@@ -9,7 +9,7 @@ interface Input extends InputHTMLAttributes<HTMLInputElement> {
   name?: InputNames
   error?: string
 }
-export type InputNames = "email" | "password"
+export type InputNames = "email" | "password" | "passwordConfirm"
 
 const Input: FC<Input> = ({
   type,
@@ -55,7 +55,8 @@ const Input: FC<Input> = ({
         />
         {error && (
           <div className={`_small ${cl.validation_error}`}>
-            <Info size={18} color="#d52650" />
+            {/* <Info size={18} color="#d52650" /> */}
+            <img src="/info.svg" alt="warning-info" />
             <span>{error}</span>
           </div>
         )}
@@ -65,8 +66,12 @@ const Input: FC<Input> = ({
             className={cl.show_password}
             onClick={togglePasswordVisibility}
           >
-            {isPasswordVisible && <Eye size={18} strokeWidth={2} />}
-            {!isPasswordVisible && <EyeOff size={18} strokeWidth={2} />}
+            {/* {isPasswordVisible && <Eye size={18} strokeWidth={2} />}
+            {!isPasswordVisible && <EyeOff size={18} strokeWidth={2} />} */}
+            {isPasswordVisible && <img src="/eye.svg" alt="hide-password" />}
+            {!isPasswordVisible && (
+              <img src="/eye-off.svg" alt="show-password" />
+            )}
           </Button>
         )}
       </div>
