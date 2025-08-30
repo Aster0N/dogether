@@ -1,3 +1,4 @@
+import { type User } from "@/entities/user"
 import { sleep } from "@/shared"
 import type { LoginFormFields } from "../types/loginFormTypes"
 import type { FormStatus } from "../types/types"
@@ -7,9 +8,18 @@ export const initialStatusState: FormStatus = {
   submitted: false,
 }
 
-const postData = async (
+const postSignIn = async (
   email: string,
   password: string
+): Promise<FormStatus> => {
+  await sleep(1500)
+  return { success: true, submitted: true }
+}
+
+const postSignUp = async (
+  email: string,
+  password: string,
+  sex?: User["sex"]
 ): Promise<FormStatus> => {
   await sleep(1500)
   return { success: true, submitted: true }
@@ -27,9 +37,7 @@ export const userSignUp = async (
   const password = formData.get(passwordData) as string
   const sex = (formData.get(selectSex) as string) ?? ""
 
-  console.log(email, password, sex)
-
-  const status = postData(email, password)
+  const status = postSignUp(email, password)
   return status
 }
 
@@ -43,6 +51,6 @@ export const userSignIn = async (
   const email = formData.get(emailData) as string
   const password = formData.get(passwordData) as string
 
-  const status = postData(email, password)
+  const status = postSignIn(email, password)
   return status
 }

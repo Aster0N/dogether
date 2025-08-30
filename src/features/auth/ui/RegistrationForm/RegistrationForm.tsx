@@ -1,5 +1,6 @@
+import { useUserStore, type User } from "@/entities/user"
 import { Button, Input, Select, Toast, useToastOpenTrigger } from "@/shared"
-import { useActionState, useState } from "react"
+import { useActionState, useEffect, useState } from "react"
 import {
   initialRegistrationFormDataState,
   registrationSchema,
@@ -10,7 +11,7 @@ import cl from "./RegistrationForm.module.scss"
 
 const RegistrationForm = () => {
   const [userSex, setUserSex] = useState("")
-  const userSexOptions = ["male", "female"]
+  const userSexOptions: User["sex"][] = ["male", "female"]
   const handleSelectValueChange = (value: string) => {
     setUserSex(value)
   }
@@ -32,6 +33,13 @@ const RegistrationForm = () => {
     setIsFormValid(isFormValid)
     setFormData(updatedFormData)
   }
+  const { signup } = useUserStore()
+
+  useEffect(() => {
+    if (registrationStatus.submitted && registrationStatus.success) {
+      signup({ id: `${Date.now()}`, email: formData.email.value })
+    }
+  }, [registrationStatus])
 
   return (
     <div>

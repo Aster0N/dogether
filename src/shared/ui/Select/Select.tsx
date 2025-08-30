@@ -1,4 +1,5 @@
 //? import { ChevronDown } from "lucide-react"
+import type { User } from "@/entities/user"
 import { useId, type FC } from "react"
 import cl from "./Select.module.scss"
 
@@ -6,7 +7,7 @@ interface Select {
   name: string
   label?: string
   valueLabel?: string
-  options: string[]
+  options: User["sex"][]
   className?: string
   value?: string
   onChange: (value: string) => void

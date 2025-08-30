@@ -7,6 +7,7 @@ export interface User {
 export interface UserStore {
   user: User | null
   isAuth: boolean
-  login: () => void
+  signin: (email: User["email"], id: User["id"]) => void
+  signup: (userData: User) => void
   logout: () => void
 }

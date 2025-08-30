@@ -1,5 +1,6 @@
+import { useUserStore } from "@/entities/user"
 import { Button, Input, Toast, useToastOpenTrigger } from "@/shared"
-import { useActionState, useState } from "react"
+import { useActionState, useEffect, useState } from "react"
 import { initialLoginFormDataState, loginSchema } from "../../lib/loginSchema"
 import { validateFormOnInputChange } from "../../lib/validateFormOnInputChange"
 import { initialStatusState, userSignIn } from "../../model/userAuth"
@@ -22,6 +23,13 @@ const LoginForm = () => {
     setIsFormValid(isFormValid)
     setFormData(updatedFormData)
   }
+  const { signin } = useUserStore()
+
+  useEffect(() => {
+    if (loginStatus.submitted && loginStatus.success) {
+      signin(formData.email.value, formData.password.value)
+    }
+  }, [loginStatus])
 
   return (
     <div>

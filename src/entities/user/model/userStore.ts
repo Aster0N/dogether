@@ -4,12 +4,18 @@ import type { UserStore } from "../types"
 export const useUserStore = create<UserStore>(set => ({
   user: null,
   isAuth: false,
-  login: () =>
+  signin: (email, id) => {
     set({
       user: {
-        id: "1",
-        email: "example@email.com",
+        id,
+        email,
       },
+      isAuth: true,
+    })
+  },
+  signup: userData =>
+    set({
+      user: userData,
       isAuth: true,
     }),
   logout: async () =>
