@@ -3,6 +3,7 @@ import { useId, type FC } from "react"
 import cl from "./Select.module.scss"
 
 interface Select {
+  name: string
   label?: string
   valueLabel?: string
   options: string[]
@@ -12,6 +13,7 @@ interface Select {
 }
 
 const Select: FC<Select> = ({
+  name,
   label,
   valueLabel,
   options,
@@ -31,7 +33,7 @@ const Select: FC<Select> = ({
     <div className={cl.select_wrapper}>
       {label && <label htmlFor={selectId}>{label}</label>}
       <select
-        name={`select-${selectId}`}
+        name={name}
         defaultValue={value || "disabled"}
         className={`${cl.select} ${className}`}
         onChange={handleSelectValueChange}

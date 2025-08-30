@@ -19,12 +19,15 @@ export const userSignUp = async (
   prevState: FormStatus,
   formData: FormData
 ): Promise<FormStatus> => {
-  const emailData: LoginFormFields = "email"
-  const passwordData: LoginFormFields = "password"
+  const emailData = "email"
+  const passwordData = "password"
+  const selectSex = "selectSex"
 
   const email = formData.get(emailData) as string
   const password = formData.get(passwordData) as string
-  // grab sex value from select
+  const sex = (formData.get(selectSex) as string) ?? ""
+
+  console.log(email, password, sex)
 
   const status = postData(email, password)
   return status

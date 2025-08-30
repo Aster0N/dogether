@@ -50,6 +50,7 @@ const RegistrationForm = () => {
             />
           ))}
           <Select
+            name="selectSex"
             options={userSexOptions}
             valueLabel="sex"
             value={userSex}

@@ -12,9 +12,21 @@ export const registrationSchema = z
       .string()
       .check(z.minLength(6, { message: "Must be at least 6 symbols" })),
   })
-  .refine(data => data.password === data.passwordConfirm, {
-    message: "Passwords do not match",
-    path: ["passwordConfirm"],
+  .superRefine(({ passwordConfirm, password }, ctx) => {
+    if (password !== passwordConfirm && passwordConfirm) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Passwords do not match",
+        path: ["password"],
+      })
+    }
+    if (password !== passwordConfirm && password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Passwords do not match",
+        path: ["passwordConfirm"],
+      })
+    }
   })
 
 export const initialRegistrationFormDataState: FormData<RegistrationFormFields> =
