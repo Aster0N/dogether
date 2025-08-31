@@ -1,4 +1,4 @@
-import { LoginForm, RegistrationForm } from "@/features/auth"
+import { LoginForm, RegistrationForm } from "@/features/"
 import { Button } from "@/shared"
 import { useState } from "react"
 import cl from "./Auth.module.scss"
