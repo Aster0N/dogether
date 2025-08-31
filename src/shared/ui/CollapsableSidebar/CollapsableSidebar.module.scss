@@ -1,0 +1,30 @@
+@use "@/app/styles/variables.scss" as *;
+
+.sidebar_wrapper {
+  max-width: 18vw;
+  background-color: $darker;
+  border-radius: $br;
+  padding: 20px;
+  transition: all 0.3s ease;
+
+  &._collapsed {
+    width: 4vw;
+  }
+
+  &._collapsed .sidebar_body {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .collapse_btn_wrapper {
+    text-align: right;
+  }
+
+  .sidebar_body {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transition: all 0.2s ease;
+  }
+}

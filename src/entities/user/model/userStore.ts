@@ -2,8 +2,11 @@ import { create } from "zustand"
 import type { UserStore } from "../types"
 
 export const useUserStore = create<UserStore>(set => ({
-  user: null,
-  isAuth: false,
+  user: {
+    id: "1",
+    email: "test@email.com",
+  },
+  isAuth: true,
   signin: (email, id) => {
     set({
       user: {
