@@ -1,11 +1,12 @@
 @use "@/app/styles/variables.scss" as *;
 
 .sidebar_wrapper {
-  max-width: 18vw;
+  width: 17vw;
   background-color: $darker;
   border-radius: $br;
   padding: 20px;
   transition: all 0.3s ease;
+  position: relative;
 
   &._collapsed {
     width: 4vw;
@@ -17,8 +18,26 @@
     pointer-events: none;
   }
 
-  .collapse_btn_wrapper {
-    text-align: right;
+  &:hover .collapse_btn {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &._collapsed .collapse_btn {
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .collapse_btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
   }
 
   .sidebar_body {

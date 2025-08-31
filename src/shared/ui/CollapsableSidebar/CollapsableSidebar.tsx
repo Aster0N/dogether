@@ -4,9 +4,13 @@ import cl from "./CollapsableSidebar.module.scss"
 
 interface CollapsableSidebar {
   children: ReactNode
+  className?: string
 }
 
-const CollapsableSidebar: FC<CollapsableSidebar> = ({ children }) => {
+const CollapsableSidebar: FC<CollapsableSidebar> = ({
+  children,
+  className,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const collapseSidebar = () => {
     setIsCollapsed(prev => !prev)
@@ -14,13 +18,13 @@ const CollapsableSidebar: FC<CollapsableSidebar> = ({ children }) => {
 
   return (
     <div
-      className={`${isCollapsed ? cl._collapsed : ""} ${cl.sidebar_wrapper}`}
+      className={`${isCollapsed ? cl._collapsed : ""} ${cl.sidebar_wrapper} ${
+        className ?? ""
+      }`}
     >
-      <div className={cl.collapse_btn_wrapper}>
-        <Button inline onClick={collapseSidebar}>
-          x
-        </Button>
-      </div>
+      <Button inline onClick={collapseSidebar} className={cl.collapse_btn}>
+        x
+      </Button>
       <div className={cl.sidebar_body}>{children}</div>
     </div>
   )
