@@ -1,6 +1,8 @@
+import { routePath } from "@/app/router"
 import { useUserStore } from "@/entities/user"
 import { Button, Input, Toast, useToastOpenTrigger } from "@/shared"
 import { useActionState, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { initialLoginFormDataState, loginSchema } from "../../lib/loginSchema"
 import { validateFormOnInputChange } from "../../lib/validateFormOnInputChange"
 import { initialStatusState, userSignIn } from "../../model/userAuth"
@@ -24,10 +26,12 @@ const LoginForm = () => {
     setFormData(updatedFormData)
   }
   const { signin } = useUserStore()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (loginStatus.submitted && loginStatus.success) {
       signin(formData.email.value, formData.password.value)
+      navigate(routePath.PROJECTS)
     }
   }, [loginStatus])
 

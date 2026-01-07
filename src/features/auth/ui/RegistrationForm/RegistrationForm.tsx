@@ -1,6 +1,8 @@
+import { routePath } from "@/app/router"
 import { useUserStore, type User } from "@/entities/user"
 import { Button, Input, Select, Toast, useToastOpenTrigger } from "@/shared"
 import { useActionState, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   initialRegistrationFormDataState,
   registrationSchema,
@@ -34,10 +36,12 @@ const RegistrationForm = () => {
     setFormData(updatedFormData)
   }
   const { signup } = useUserStore()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (registrationStatus.submitted && registrationStatus.success) {
       signup({ id: `${Date.now()}`, email: formData.email.value })
+      navigate(routePath.PROJECTS)
     }
   }, [registrationStatus])
 
