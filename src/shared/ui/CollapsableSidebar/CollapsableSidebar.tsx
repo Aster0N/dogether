@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, type FC, type ReactNode } from "react"
 import Button from "../Button/Button"
 import cl from "./CollapsableSidebar.module.scss"
@@ -22,10 +23,12 @@ const CollapsableSidebar: FC<CollapsableSidebar> = ({
         className ?? ""
       }`}
     >
-      <Button inline onClick={collapseSidebar} className={cl.collapse_btn}>
-        x
-      </Button>
       <div className={cl.sidebar_body}>{children}</div>
+      <div className={cl.collapsable_area}>
+        <Button inline onClick={collapseSidebar} className={cl.collapse_btn}>
+          {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
+        </Button>
+      </div>
     </div>
   )
 }

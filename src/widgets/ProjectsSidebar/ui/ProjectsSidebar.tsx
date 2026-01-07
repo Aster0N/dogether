@@ -1,12 +1,12 @@
-import { CreateProjectMenu } from "@/features"
+import { ProjectMenu } from "@/features"
 import { CollapsableSidebar } from "@/shared"
 
 const ProjectsSidebar = () => {
   return (
     <CollapsableSidebar>
-      <CreateProjectMenu />
+      <ProjectMenu />
       <hr />
-      <span>@briefly info here@briefly info here</span>
+      <span>@briefly info here</span>
     </CollapsableSidebar>
   )
 }

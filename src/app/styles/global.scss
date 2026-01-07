@@ -50,6 +50,7 @@ h6 {
 }
 ._small {
   font-size: 0.9rem;
+  font-weight: 300;
 }
 ._big {
   font-size: 1.2rem;
@@ -63,5 +64,4 @@ a:visited {
 }
 a._link-active {
   color: $red;
-  text-decoration: underline;
 }
