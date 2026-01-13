@@ -48,7 +48,10 @@
   }
 
   .sidebar_body {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
+    gap: 10px;
     height: 100%;
     padding: 5px;
     opacity: 1;

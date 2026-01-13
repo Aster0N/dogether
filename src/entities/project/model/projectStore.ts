@@ -1,22 +1,26 @@
 import { create } from "zustand"
 import type { ProjectStore } from "../types"
 
-const useProjectStore = create<ProjectStore>(set => ({
+export const useProjectStore = create<ProjectStore>(set => ({
   projectList: {},
-  addNewProject: (id, title, description) => {
+  selectedProjectId: null,
+  addNewProject: (title, description) => {
+    const newId = crypto.randomUUID()
+    const newProject = {
+      id: newId,
+      title,
+      description,
+      updatedAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+      createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+      done: false,
+      ownerId: "smth",
+    }
     set(state => ({
       projectList: {
         ...state.projectList,
-        [id]: {
-          id,
-          title,
-          description,
-          updatedAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
-          createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
-          done: false,
-          ownerId: "smth",
-        },
+        [newId]: newProject,
       },
+      selectedProjectId: newId,
     }))
   },
   removeProjectById: id => {
@@ -24,5 +28,11 @@ const useProjectStore = create<ProjectStore>(set => ({
       const { [id]: _, ...rest } = state.projectList
       return { projectList: rest }
     })
+  },
+  selectProject: id => {
+    set({ selectedProjectId: id })
+  },
+  deselectProject: () => {
+    set({ selectedProjectId: null })
   },
 }))

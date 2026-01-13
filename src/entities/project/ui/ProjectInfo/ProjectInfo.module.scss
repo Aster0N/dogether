@@ -1,0 +1,28 @@
+@use "@/app/styles/variables.scss" as *;
+
+.divider {
+  background-color: $black;
+  height: 1px;
+  margin: 5px 0;
+}
+
+.info_body {
+  padding: 10px;
+  border-radius: $br-small;
+  background-color: $primary;
+  color: $text-d;
+
+  & .title,
+  & .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & .title {
+    -webkit-line-clamp: 2;
+  }
+  & .description {
+    -webkit-line-clamp: 5;
+  }
+}
