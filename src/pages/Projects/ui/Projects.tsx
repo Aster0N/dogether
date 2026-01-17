@@ -1,4 +1,4 @@
-import { ProjectsSidebar } from "@/widgets"
+import { ProjectsList, ProjectsSidebar } from "@/widgets"
 import cl from "./Projects.module.scss"
 
 const Projects = () => {
@@ -7,7 +7,7 @@ const Projects = () => {
       <h4 className={cl.header}>My projects</h4>
       <div className={cl.projects_wrapper}>
         <ProjectsSidebar />
-        <div className={cl.project_grid}>projects here...</div>
+        <ProjectsList />
       </div>
     </>
   )

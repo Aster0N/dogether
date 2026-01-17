@@ -1,0 +1,42 @@
+@use "@/app/styles/variables.scss" as *;
+
+.project_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 150px;
+  gap: 25px;
+
+  .project_card {
+    padding: 15px;
+    border-radius: $br;
+    border: 2px solid $darker;
+    height: 150px;
+    transition: border 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid $accent;
+    }
+
+    .description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-clamp: 3;
+      -webkit-line-clamp: 3;
+    }
+  }
+}
+@media (max-width: 1025px) {
+  .project_grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .project_grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
