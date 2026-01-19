@@ -15,7 +15,7 @@ export interface ProjectStore {
   selectedProjectId: string | null
   addNewProject: (
     title: Project["title"],
-    description: Project["description"]
+    description: Project["description"],
   ) => void
   removeProjectById: (id: Project["id"]) => void
   selectProject: (id: Project["id"]) => void

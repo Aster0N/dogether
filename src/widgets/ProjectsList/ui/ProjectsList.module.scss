@@ -18,13 +18,42 @@
       border: 2px solid $accent;
     }
 
+    .title {
+      margin: 0 0 5px 0;
+    }
+
+    .project_id_container {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px;
+      border-radius: $br-small;
+      background-color: $darker;
+      transition: all 0.3s ease-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba($color: $darker, $alpha: 0.5);
+      }
+
+      .project_id {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+      }
+    }
+
     .description {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-clamp: 3;
-      -webkit-line-clamp: 3;
+      margin: 10px 0 0 0;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
     }
   }
 }
