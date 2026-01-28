@@ -1,3 +1,4 @@
+export { copyToClipboard } from "./lib/copyToClipboard"
 export { sleep } from "./lib/sleep"
 export { useToastOpenTrigger } from "./lib/useToastOpenTrigger"
 export { default as Button } from "./ui/Button/Button"
