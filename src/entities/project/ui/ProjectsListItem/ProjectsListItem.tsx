@@ -16,7 +16,8 @@ const ProjectsListItem: FC<ProjectsListItemProps> = ({
   project,
   ...props
 }) => {
-  const { selectProject } = useProjectStore()
+  const { selectProject, selectedProjectId } = useProjectStore()
+  const isSelected = projectId == selectedProjectId
 
   const projectIdRefs = useRef<HTMLElement | null>(null)
   const [isIdCopying, setIsIdCopying] = useState(false)
@@ -37,7 +38,7 @@ const ProjectsListItem: FC<ProjectsListItemProps> = ({
   return (
     <>
       <div
-        className={cl.project_card}
+        className={`${cl.project_card} ${isSelected && cl.project_card_selected}`}
         onClick={() => selectProject(projectId)}
         {...props}
       >

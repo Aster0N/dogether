@@ -8,6 +8,10 @@
   transition: border 0.3s ease;
   cursor: pointer;
 
+  &.project_card_selected {
+    border: 2px solid $accent;
+  }
+
   &:hover {
     border: 2px solid $accent;
   }
