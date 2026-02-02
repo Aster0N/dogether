@@ -8,8 +8,14 @@ interface Input extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   name?: InputNames
   error?: string
+  small?: boolean
 }
-export type InputNames = "email" | "password" | "passwordConfirm"
+// TODO get off InputNames
+export type InputNames =
+  | "email"
+  | "password"
+  | "passwordConfirm"
+  | "projectTitle"
 
 const Input: FC<Input> = ({
   type,
@@ -19,6 +25,7 @@ const Input: FC<Input> = ({
   error,
   required = true,
   onChange,
+  small,
 }) => {
   const inputId = `${useId()}`
   const [isFocused, setIsFocused] = useState(false)
@@ -33,7 +40,7 @@ const Input: FC<Input> = ({
 
   return (
     <div className={cl.input_block_wrapper}>
-      {label && (
+      {label && !small && (
         <label
           htmlFor={inputId}
           className={`${cl.label} ${isFocused || value ? cl.focused : ""}`}
@@ -45,13 +52,14 @@ const Input: FC<Input> = ({
         <input
           type={inputType}
           id={inputId}
-          className={cl.input}
+          className={`${cl.input} ${small && cl.input_small}`}
           onFocus={onFocus}
           onBlur={onBlur}
           value={value}
           name={name}
           required={required}
           onChange={onChange}
+          placeholder={small && label ? label : ""}
         />
         {error && (
           <div className={`_small ${cl.validation_error}`}>

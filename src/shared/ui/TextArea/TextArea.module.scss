@@ -1,0 +1,22 @@
+@use "@/app/styles/variables.scss" as *;
+
+.toggle_textarea_btn {
+  margin: 0 0 0 10px;
+}
+
+.textarea {
+  resize: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 2px solid $darker;
+  background-color: $black;
+  display: block;
+  color: $text-l;
+  outline: none;
+  padding: 5px;
+  border-radius: $br-small;
+
+  &.textarea_hidden {
+    display: none;
+  }
+}

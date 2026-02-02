@@ -27,6 +27,13 @@
       border-bottom: 1px solid $primary;
       color: $text-l;
       font-size: 16px;
+
+      &.input_small {
+        width: 100%;
+        border: 2px solid $darker;
+        border-radius: $br-small;
+        padding: 5px 10px;
+      }
     }
 
     .validation_error {
