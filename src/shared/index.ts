@@ -6,4 +6,5 @@ export { default as CollapsableSidebar } from "./ui/CollapsableSidebar/Collapsab
 export { default as Input } from "./ui/Input/Input"
 export { default as NavigationLink } from "./ui/NavigationLink/NavigationLink"
 export { default as Select } from "./ui/Select/Select"
+export { default as TextArea } from "./ui/TextArea/TextArea"
 export { default as Toast } from "./ui/Toast/Toast"
