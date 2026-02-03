@@ -1,9 +1,8 @@
-import type { InputNames } from "@/shared/ui/Input/Input"
 import type { z } from "zod"
 import type { ZodMiniObject } from "zod/mini"
 
 export interface ValidateForm {
-  <T extends Record<InputNames, string>>(
+  <T extends Record<string, string>>(
     data: T,
     zodSchema: z.ZodObject | ZodMiniObject,
   ): {

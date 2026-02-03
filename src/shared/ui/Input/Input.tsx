@@ -6,16 +6,9 @@ import cl from "./Input.module.scss"
 
 interface Input extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  name?: InputNames
   error?: string
   small?: boolean
 }
-// TODO get off InputNames
-export type InputNames =
-  | "email"
-  | "password"
-  | "passwordConfirm"
-  | "projectTitle"
 
 const Input: FC<Input> = ({
   type,

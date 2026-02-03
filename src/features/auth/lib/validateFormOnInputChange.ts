@@ -1,27 +1,26 @@
-import type { InputNames } from "@/shared/ui/Input/Input"
 import { z } from "zod"
 import type { ZodMiniObject } from "zod/mini"
 import type { FieldData, FormData, ZodValidationResult } from "../types/types"
 import { grabMessageFromZodErrors } from "./grabMessageFromZodErrors"
 import { validateForm } from "./validateForm"
 
-type InputValidationResult<T extends InputNames> = {
+type InputValidationResult<T extends string> = {
   isFormValid: boolean
   updatedFormData: FormData<T>
 }
 
 interface ValidateFormOnInputChange {
-  <T extends InputNames>(
+  <T extends string>(
     event: React.ChangeEvent<HTMLInputElement>,
     formData: FormData<T>,
-    schema: z.ZodObject | ZodMiniObject
+    schema: z.ZodObject | ZodMiniObject,
   ): InputValidationResult<T>
 }
 
 export const validateFormOnInputChange: ValidateFormOnInputChange = (
   event,
   formData,
-  schema
+  schema,
 ) => {
   const name = event.target.name as keyof typeof formData
   const value = event.target.value
@@ -40,8 +39,8 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
     Object.entries(updatedData).map(([key, field]) => [
       key,
       (field as FieldData).value,
-    ])
-  ) as Record<InputNames, string>
+    ]),
+  ) as Record<string, string>
 
   const validationResult: ZodValidationResult = validateForm(formValues, schema)
 
@@ -54,7 +53,7 @@ export const validateFormOnInputChange: ValidateFormOnInputChange = (
 
   const errors = grabMessageFromZodErrors(
     validationResult,
-    Object.values(updatedData)
+    Object.values(updatedData),
   )
 
   return {

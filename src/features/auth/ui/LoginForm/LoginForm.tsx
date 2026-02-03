@@ -22,7 +22,6 @@ const LoginForm = () => {
       formData,
       loginSchema,
     )
-    console.log(updatedFormData)
     setIsFormValid(isFormValid)
     setFormData(updatedFormData)
   }
