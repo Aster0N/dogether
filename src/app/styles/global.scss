@@ -65,3 +65,8 @@ a:visited {
 a._link-active {
   color: $red;
 }
+._space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

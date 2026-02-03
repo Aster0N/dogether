@@ -62,4 +62,17 @@
       color: $primary;
     }
   }
+
+  &.btn_danger {
+    color: $red;
+    border: 2px solid $red;
+
+    &:hover {
+      background-color: rgba($color: $red, $alpha: 0.2);
+    }
+
+    &:focus {
+      outline: 1px solid $red;
+    }
+  }
 }

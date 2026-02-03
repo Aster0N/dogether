@@ -56,7 +56,14 @@ export const useProjectStore = create<ProjectStore>(set => ({
   removeProjectById: id => {
     set(state => {
       const { [id]: _, ...rest } = state.projectList
-      return { projectList: rest }
+      const needToResetSelectedId = id == state.selectedProjectId
+
+      return {
+        selectedProjectId: needToResetSelectedId
+          ? null
+          : state.selectedProjectId,
+        projectList: rest,
+      }
     })
   },
   selectProject: id => {

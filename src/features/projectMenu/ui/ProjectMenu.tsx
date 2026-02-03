@@ -1,16 +1,17 @@
 import { ProjectCreationForm, useProjectStore } from "@/entities/project"
 import { Button } from "@/shared"
-import { ChevronUp, Plus } from "lucide-react"
+import { ChevronUp, Plus, Trash2 } from "lucide-react"
 import { useActionState, useEffect, useState } from "react"
 import { updateNewProjectStatus } from "../model/updateNewProjectStatus"
 import { initialStatus } from "../types"
 import cl from "./ProjectMenu.module.scss"
 
 const ProjectMenu = () => {
-  const { addNewProject } = useProjectStore()
+  const { addNewProject, selectedProjectId, removeProjectById } =
+    useProjectStore()
   const [isCreateProjectFormOpen, setIsCreateProjectFormOpen] = useState(false)
 
-  const [newProjectStatus, createProjectAction, isPending] = useActionState(
+  const [newProjectStatus, createProjectAction] = useActionState(
     updateNewProjectStatus,
     initialStatus,
   )
@@ -23,6 +24,13 @@ const ProjectMenu = () => {
     }
   }, [newProjectStatus.isProcessed])
 
+  const deleteProject = () => {
+    if (!selectedProjectId) {
+      return
+    }
+    removeProjectById(selectedProjectId)
+  }
+
   return (
     <div className={cl.project_menu}>
       <Button
@@ -30,8 +38,8 @@ const ProjectMenu = () => {
         className={cl.menu_btn}
         onClick={() => setIsCreateProjectFormOpen(prev => !prev)}
       >
-        <div className={`_small ${cl.menu_btn_content}`}>
-          <span>{isPending ? "creating" : "create"}</span>
+        <div className="_small _space-between">
+          <span>create</span>
           {isCreateProjectFormOpen ? (
             <ChevronUp color="#20927b" strokeWidth={2} />
           ) : (
@@ -41,6 +49,17 @@ const ProjectMenu = () => {
       </Button>
       {isCreateProjectFormOpen && (
         <ProjectCreationForm formAction={createProjectAction} />
+      )}
+      {selectedProjectId && (
+        <Button
+          danger
+          dark
+          className="_small _space-between"
+          onClick={deleteProject}
+        >
+          <span>delete project</span>
+          <Trash2 color="#d41a46" strokeWidth={2} />
+        </Button>
       )}
     </div>
   )

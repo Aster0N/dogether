@@ -7,6 +7,7 @@ interface Button extends React.HTMLProps<HTMLButtonElement> {
   big?: boolean
   dark?: boolean
   inline?: boolean
+  danger?: boolean
   type?: "submit" | "reset" | "button" | undefined
   onClick?: () => void
   className?: string
@@ -17,6 +18,7 @@ const Button: FC<Button> = ({
   big = false,
   dark = false,
   inline = false,
+  danger = false,
   onClick,
   type = "button",
   className,
@@ -28,7 +30,7 @@ const Button: FC<Button> = ({
     <button
       className={`${cl.button} ${big ? cl.btn_large : cl.btn_small} ${
         dark ? cl.btn_dark : ""
-      } ${inline ? cl.btn_inline : ""} ${className ? className : ""}`}
+      } ${inline ? cl.btn_inline : ""} ${danger ? cl.btn_danger : ""} ${className ? className : ""}`}
       onClick={onClick}
       type={type}
       disabled={formStatus.pending}
