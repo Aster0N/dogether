@@ -5,7 +5,7 @@ import type { ZodMiniObject } from "zod/mini"
 export interface ValidateForm {
   <T extends Record<InputNames, string>>(
     data: T,
-    zodSchema: z.ZodObject | ZodMiniObject
+    zodSchema: z.ZodObject | ZodMiniObject,
   ): {
     success: boolean
     error?: z.core.$ZodError

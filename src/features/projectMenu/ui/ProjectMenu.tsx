@@ -1,6 +1,6 @@
 import { ProjectCreationForm, useProjectStore } from "@/entities/project"
 import { Button } from "@/shared"
-import { Plus } from "lucide-react"
+import { ChevronUp, Plus } from "lucide-react"
 import { useActionState, useEffect, useState } from "react"
 import { updateNewProjectStatus } from "../model/updateNewProjectStatus"
 import { initialStatus } from "../types"
@@ -32,7 +32,11 @@ const ProjectMenu = () => {
       >
         <div className={`_small ${cl.menu_btn_content}`}>
           <span>{isPending ? "creating" : "create"}</span>
-          <Plus color="#20927b" strokeWidth={2} />
+          {isCreateProjectFormOpen ? (
+            <ChevronUp color="#20927b" strokeWidth={2} />
+          ) : (
+            <Plus color="#20927b" strokeWidth={2} />
+          )}
         </div>
       </Button>
       {isCreateProjectFormOpen && (

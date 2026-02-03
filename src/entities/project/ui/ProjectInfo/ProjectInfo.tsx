@@ -1,8 +1,7 @@
-import type { FC } from "react"
 import { useProjectStore } from "../../model/projectStore"
 import cl from "./ProjectInfo.module.scss"
 
-const ProjectInfo: FC = () => {
+const ProjectInfo = () => {
   const { projectList, selectedProjectId } = useProjectStore()
   const project = selectedProjectId ? projectList[selectedProjectId] : null
 

@@ -13,15 +13,16 @@ const LoginForm = () => {
   const [isFormValid, setIsFormValid] = useState(false)
   const [loginStatus, formAction, isPending] = useActionState(
     userSignIn,
-    initialStatusState
+    initialStatusState,
   )
   const { showToast, onToastClose } = useToastOpenTrigger(loginStatus.submitted)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { isFormValid, updatedFormData } = validateFormOnInputChange(
       event,
       formData,
-      loginSchema
+      loginSchema,
     )
+    console.log(updatedFormData)
     setIsFormValid(isFormValid)
     setFormData(updatedFormData)
   }
