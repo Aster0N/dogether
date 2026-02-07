@@ -1,7 +1,9 @@
+import { routePath } from "@/app/router"
 import { ProjectCreationForm, useProjectStore } from "@/entities/project"
 import { Button } from "@/shared"
 import { ChevronUp, Plus, Trash2 } from "lucide-react"
 import { useActionState, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { updateNewProjectStatus } from "../model/updateNewProjectStatus"
 import { initialStatus } from "../types"
 import cl from "./ProjectMenu.module.scss"
@@ -50,6 +52,15 @@ const ProjectMenu = () => {
       {isCreateProjectFormOpen && (
         <ProjectCreationForm formAction={createProjectAction} />
       )}
+      {selectedProjectId && (
+        <Link
+          to={`${routePath.PROJECTS}/${selectedProjectId}`}
+          className={cl.project_link}
+        >
+          open project
+        </Link>
+      )}
+      {/*// TODO mb make project removal in certain project page */}
       {selectedProjectId && (
         <Button
           danger

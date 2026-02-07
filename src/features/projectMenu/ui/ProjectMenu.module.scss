@@ -1,3 +1,5 @@
+@use "@/app/styles/variables.scss" as *;
+
 .project_menu {
   display: flex;
   flex-direction: column;
@@ -5,4 +7,17 @@
 }
 .menu_btn {
   width: 100%;
+}
+.project_link {
+  width: 100%;
+  padding: 8px 0;
+  text-align: center;
+  background-color: $secondary;
+  color: $text-d !important;
+  border-radius: $br-small;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary;
+  }
 }

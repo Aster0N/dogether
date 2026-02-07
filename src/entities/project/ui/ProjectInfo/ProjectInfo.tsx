@@ -49,7 +49,7 @@ const ProjectInfo = () => {
           )}
         </h6>
         <Button inline dark onClick={toggleEditableTitle}>
-          <SquarePen size={18} />
+          <SquarePen color="#20927b" size={18} />
         </Button>
       </div>
       <div className={cl.divider}></div>

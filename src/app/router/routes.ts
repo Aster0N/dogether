@@ -1,4 +1,4 @@
-import { Auth, Home, NotFound, Profile, Projects } from "@/pages"
+import { Auth, Home, NotFound, Profile, ProjectById, Projects } from "@/pages"
 import React, { type ReactElement } from "react"
 
 export type AvailableRoute = {
@@ -15,6 +15,7 @@ export const routePath = {
   AUTH: "/auth",
   PROFILE: "/profile",
   PROJECTS: "/projects",
+  PROJECT: "/projects/:projectId",
 } as const
 
 export const publicRoutes: AvailableRoutes = [
@@ -60,5 +61,10 @@ export const privateRoutes: AvailableRoutes = [
     path: routePath.PROJECTS,
     element: React.createElement(Projects),
     placeholder: "projects",
+  },
+  {
+    path: routePath.PROJECT,
+    element: React.createElement(ProjectById),
+    placeholder: "project",
   },
 ]
