@@ -20,4 +20,5 @@ export interface ProjectStore {
   removeProjectById: (id: Project["id"]) => void
   selectProject: (id: Project["id"]) => void
   deselectProject: () => void
+  updateProjectData: (project: Project) => void
 }

@@ -27,4 +27,14 @@
     line-clamp: 5;
     -webkit-line-clamp: 5;
   }
+
+  .editable_title {
+    font-size: 19px;
+    color: $text-d;
+    text-decoration: underline;
+    font-weight: 600;
+    background-color: transparent;
+    outline: none;
+    border: none;
+  }
 }

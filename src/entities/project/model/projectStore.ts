@@ -72,4 +72,15 @@ export const useProjectStore = create<ProjectStore>(set => ({
   deselectProject: () => {
     set({ selectedProjectId: null })
   },
+  updateProjectData: project => {
+    set(state => ({
+      projectList: {
+        ...state.projectList,
+        [project.id]: {
+          ...project,
+          updatedAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+        },
+      },
+    }))
+  },
 }))
