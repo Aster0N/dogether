@@ -12,10 +12,12 @@ const Navbar = () => {
 
   const leftSideLinks = availableRoutes.filter(
     route =>
-      route.path !== routePath.NOT_FOUND && route.path !== routePath.PROFILE
+      route.path !== routePath.NOT_FOUND &&
+      route.path !== routePath.PROFILE &&
+      route.path !== routePath.PROJECT,
   )
   const rightSideLinks = availableRoutes.filter(
-    route => route.path === routePath.PROFILE
+    route => route.path === routePath.PROFILE,
   )
 
   return (
