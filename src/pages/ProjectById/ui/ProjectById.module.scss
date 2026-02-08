@@ -1,0 +1,17 @@
+@use "@/app/styles/variables.scss" as *;
+
+.title {
+  margin-bottom: 20px;
+}
+.info_header_wrapper {
+  display: flex;
+  gap: 50px;
+
+  .description {
+    background-color: $darker;
+    padding: 10px;
+    border-radius: $br;
+    display: inline-block;
+    width: 40vw;
+  }
+}

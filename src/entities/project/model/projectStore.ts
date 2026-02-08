@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import type { ProjectStore } from "../types"
 
-export const useProjectStore = create<ProjectStore>(set => ({
+export const useProjectStore = create<ProjectStore>((set, get) => ({
   projectList: {
     "f41c04e7-828f-486c-9e1d-c2058cb43274": {
       id: "f41c04e7-828f-486c-9e1d-c2058cb43274",
@@ -82,5 +82,22 @@ export const useProjectStore = create<ProjectStore>(set => ({
         },
       },
     }))
+  },
+  getProjectById: id => {
+    const uuidRegex =
+      /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i
+    const isIdValid = id.match(uuidRegex)
+
+    if (!isIdValid) {
+      return
+    }
+
+    const project = get().projectList[id]
+
+    if (!project) {
+      return
+    }
+
+    return project
   },
 }))

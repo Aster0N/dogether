@@ -11,6 +11,7 @@
   border-radius: $br-small;
   background-color: $primary;
   color: $text-d;
+  flex-grow: 1;
 
   & .title,
   & .description {
