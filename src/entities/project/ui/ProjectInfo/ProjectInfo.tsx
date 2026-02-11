@@ -1,7 +1,6 @@
-import { handleTitleChange } from "@/entities/project/model/handleTitleChange"
-import { Button } from "@/shared"
-import { SquarePen } from "lucide-react"
-import { useEffect, useState, type ChangeEvent } from "react"
+import { EditableBlock } from "@/shared"
+import type { ChangeEvent } from "react"
+import { handleTitleChange } from "../../model/handleTitleChange"
 import { useProjectStore } from "../../model/projectStore"
 import cl from "./ProjectInfo.module.scss"
 
@@ -9,27 +8,12 @@ const ProjectInfo = () => {
   const { projectList, selectedProjectId, updateProjectData } =
     useProjectStore()
   const project = selectedProjectId ? projectList[selectedProjectId] : null
-  const [isEditable, setIsEditable] = useState(false)
-  const [titleValue, setTitleValue] = useState("")
-
-  useEffect(() => {
-    setIsEditable(false)
-    setTitleValue("")
-  }, [selectedProjectId])
 
   if (!project) {
     return null
   }
 
-  const toggleEditableTitle = () => {
-    setIsEditable(prev => !prev)
-    if (!titleValue) {
-      setTitleValue(project.title)
-    }
-  }
-
   const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitleValue(e.target.value)
     const updatedProject = handleTitleChange(e, project)
     updateProjectData(updatedProject)
   }
@@ -37,20 +21,12 @@ const ProjectInfo = () => {
   return (
     <div className={cl.info_body}>
       <div className="_space-between">
-        <h6 className={cl.title}>
-          {isEditable ? (
-            <input
-              value={titleValue}
-              onChange={changeTitle}
-              className={cl.editable_title}
-            ></input>
-          ) : (
-            project.title
-          )}
-        </h6>
-        <Button inline dark onClick={toggleEditableTitle}>
-          <SquarePen color="#20927b" size={18} />
-        </Button>
+        <EditableBlock
+          onChange={changeTitle}
+          trackedValue={project.title}
+          resetValueOnDeps={[selectedProjectId]}
+					className={cl.editable_title}
+        />
       </div>
       <div className={cl.divider}></div>
       <p className={`_small ${cl.description}`}>{project.description}</p>

@@ -1,0 +1,12 @@
+@use "@/app/styles/variables.scss" as *;
+
+.editable_value {
+  width: 100%;
+  text-decoration: underline;
+  font-size: inherit;
+  color: $text-d;
+  font-weight: 600;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
