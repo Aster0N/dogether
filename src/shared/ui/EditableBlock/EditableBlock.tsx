@@ -37,23 +37,24 @@ const EditableBlock: FC<EditableBlockProps> = ({
   }, [...(resetValueOnDeps ?? [])])
 
   return (
-    <>
-      <div className={className ? className : ""}>
+    <div className={`${cl.editable_block_wrapper} _space-between`}>
+      <div className={`${className ? className : ""}`}>
         {isEditable ? (
           <input
             name={trackedValue}
             value={value}
             className={cl.editable_value}
             onChange={changeValue}
+            placeholder="type smth..."
           ></input>
         ) : (
           trackedValue
         )}
       </div>
-      <Button inline dark onClick={toggleEditMode}>
+      <Button inline dark onClick={toggleEditMode} className={cl.toggle_edit}>
         <SquarePen color="#20927b" size={18} />
       </Button>
-    </>
+    </div>
   )
 }
 

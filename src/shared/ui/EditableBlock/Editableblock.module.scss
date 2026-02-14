@@ -1,12 +1,21 @@
 @use "@/app/styles/variables.scss" as *;
 
-.editable_value {
+.editable_block_wrapper {
   width: 100%;
-  text-decoration: underline;
-  font-size: inherit;
-  color: $text-d;
-  font-weight: 600;
-  background-color: transparent;
-  outline: none;
-  border: none;
+  align-items: center;
+
+  .editable_value {
+    width: 100%;
+    text-decoration: underline;
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    outline: none;
+    border: none;
+  }
+
+  .toggle_edit {
+    align-self: flex-start;
+  }
 }

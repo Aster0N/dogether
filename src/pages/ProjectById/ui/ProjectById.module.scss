@@ -5,13 +5,18 @@
 }
 .info_header_wrapper {
   display: flex;
-  gap: 50px;
+  gap: 40px;
 
-  .description {
+  .description_wrapper {
     background-color: $darker;
     padding: 10px;
     border-radius: $br;
-    display: inline-block;
-    width: 40vw;
+    width: 35vw;
+
+    .description {
+      display: inline-block;
+      width: 100%;
+      padding: 0 5px 0 0;
+    }
   }
 }
