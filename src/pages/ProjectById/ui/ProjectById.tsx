@@ -1,4 +1,4 @@
-import { ProjectInfo, useProjectStore } from "@/entities/project"
+import { useProjectStore } from "@/entities/project"
 import { EditableBlock } from "@/shared"
 import type { ChangeEvent } from "react"
 import { useParams } from "react-router-dom"
@@ -40,15 +40,16 @@ const ProjectById = () => {
       <h4 className={cl.title}>{project.title}</h4>
       <div className={cl.info_header_wrapper}>
         <div className={cl.description_wrapper}>
-        	{project.description && (
-	          <EditableBlock
-	            trackedValue={project.description}
-	            className={cl.description}
-	            onChange={onDescriptionChange}
-	          />
-	        )}
+          {project.description && (
+            <EditableBlock
+              trackedValue={project.description}
+              className={cl.description}
+              onChange={onDescriptionChange}
+              isTextArea
+              name="descriptionInfo"
+            />
+          )}
         </div>
-        <ProjectInfo />
       </div>
     </>
   )

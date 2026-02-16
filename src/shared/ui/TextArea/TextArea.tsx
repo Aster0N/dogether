@@ -5,6 +5,7 @@ import cl from "./Textarea.module.scss"
 interface Textarea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   toggleWithLabel?: string
+  className?: string
 }
 
 const Textarea: FC<Textarea> = ({
@@ -14,10 +15,12 @@ const Textarea: FC<Textarea> = ({
   rows,
   cols,
   toggleWithLabel,
+  onChange,
+  className,
   ...props
 }) => {
   const textareaId = useId()
-  const isLabelOptional = toggleWithLabel?.length != 0
+  const isLabelOptional = !!toggleWithLabel?.length
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(isLabelOptional)
 
   const toggleTextArea = () => {
@@ -47,7 +50,8 @@ const Textarea: FC<Textarea> = ({
         id={textareaId}
         rows={rows ?? 6}
         cols={cols}
-        className={`_small ${cl.textarea} ${isTextAreaOpen ? cl.textarea_hidden : ""}`}
+        className={`_small ${cl.textarea} ${isTextAreaOpen ? cl.textarea_hidden : ""} ${className ? className : ""}`}
+        onChange={onChange}
         {...props}
       ></textarea>
     </>

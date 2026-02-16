@@ -12,11 +12,18 @@
     padding: 10px;
     border-radius: $br;
     width: 35vw;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 
     .description {
       display: inline-block;
       width: 100%;
       padding: 0 5px 0 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
     }
   }
 }

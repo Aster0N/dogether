@@ -25,6 +25,7 @@ const ProjectInfo = () => {
         trackedValue={project.title}
         resetValueOnDeps={[selectedProjectId]}
         className={cl.editable_title}
+        name="titleInfo"
       />
       <div className={cl.divider}></div>
       <p className={`_small ${cl.description}`}>{project.description}</p>

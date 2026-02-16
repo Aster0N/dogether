@@ -1,13 +1,17 @@
-import { Button } from "@/shared"
+import { Button, TextArea } from "@/shared"
 import { SquarePen } from "lucide-react"
-import { useEffect, useState, type ChangeEvent, type FC } from "react"
+import { useEffect, useState, type ChangeEventHandler, type FC } from "react"
 import cl from "./EditableBlock.module.scss"
+
+type ChangeHandler = ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
 
 interface EditableBlockProps {
   trackedValue: string
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange: ChangeHandler
   resetValueOnDeps?: unknown[] // ? questionable solution
   className?: string
+  isTextArea?: boolean
+  name: string
 }
 
 const EditableBlock: FC<EditableBlockProps> = ({
@@ -15,11 +19,13 @@ const EditableBlock: FC<EditableBlockProps> = ({
   onChange,
   resetValueOnDeps,
   className,
+  isTextArea = false,
+  name,
 }) => {
   const [isEditable, setIsEditable] = useState(false)
   const [value, setValue] = useState("")
 
-  const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeValue: ChangeHandler = e => {
     setValue(e.target.value)
     onChange(e)
   }
@@ -40,13 +46,23 @@ const EditableBlock: FC<EditableBlockProps> = ({
     <div className={`${cl.editable_block_wrapper} _space-between`}>
       <div className={`${className ? className : ""}`}>
         {isEditable ? (
-          <input
-            name={trackedValue}
-            value={value}
-            className={cl.editable_value}
-            onChange={changeValue}
-            placeholder="type smth..."
-          ></input>
+          isTextArea ? (
+            <TextArea
+              name={name}
+              value={value}
+              className={cl.editable_value}
+              onChange={changeValue}
+              placeholder="type smth..."
+            />
+          ) : (
+            <input
+              name={name}
+              value={value}
+              className={cl.editable_value}
+              onChange={changeValue}
+              placeholder="type smth..."
+            ></input>
+          )
         ) : (
           trackedValue
         )}
