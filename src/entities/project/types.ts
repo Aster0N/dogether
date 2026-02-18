@@ -1,3 +1,5 @@
+import type { Task } from "../task/types"
+
 export interface Project {
   id: string
   title: string
@@ -6,6 +8,8 @@ export interface Project {
   createdAt: string
   done: boolean
   ownerId: string
+  taskIds: string[]
+  taskGroupIds: string[]
 }
 
 export interface ProjectStore {
@@ -13,6 +17,8 @@ export interface ProjectStore {
     [id: Project["id"]]: Project
   }
   selectedProjectId: string | null
+  taskGroupIds: string[]
+  taskIds: string[]
   addNewProject: (
     title: Project["title"],
     description: Project["description"],
@@ -22,4 +28,10 @@ export interface ProjectStore {
   deselectProject: () => void
   updateProjectData: (project: Project) => void
   getProjectById: (id: Project["id"]) => Project | undefined
+
+  addNewTask: (
+    projectId: Project["id"],
+    taskId: Task["id"],
+    //groupid
+  ) => void
 }

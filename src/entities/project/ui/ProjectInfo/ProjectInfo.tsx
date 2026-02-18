@@ -20,13 +20,15 @@ const ProjectInfo = () => {
 
   return (
     <div className={cl.info_body}>
-      <EditableBlock
-        onChange={changeTitle}
-        trackedValue={project.title}
-        resetValueOnDeps={[selectedProjectId]}
-        className={cl.editable_title}
-        name="titleInfo"
-      />
+      <div>
+        <EditableBlock
+          onChange={changeTitle}
+          trackedValue={project.title}
+          resetValueOnDeps={[selectedProjectId]}
+          className={cl.editable_title}
+          name="titleInfo"
+        />
+      </div>
       <div className={cl.divider}></div>
       <p className={`_small ${cl.description}`}>{project.description}</p>
       {project.description && <div className={cl.divider}></div>}

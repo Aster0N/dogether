@@ -5,35 +5,20 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
   projectList: {
     "f41c04e7-828f-486c-9e1d-c2058cb43274": {
       id: "f41c04e7-828f-486c-9e1d-c2058cb43274",
-      title: "Team Stand-up",
+      title: "Click on this card",
       description:
-        "Prepare the agenda and materials for the weekly department meeting.",
+        "You can see briefly info about this project on the left side of the screen.",
       updatedAt: "2026.01.17",
       createdAt: "2026.01.17",
       done: false,
       ownerId: "smth",
-    },
-    "207376ac-ee5f-405d-acb8-af7f42c50c95": {
-      id: "207376ac-ee5f-405d-acb8-af7f42c50c95",
-      title: "Pay Bills",
-      description:
-        "Settle utility and internet invoices before the end of the month.",
-      updatedAt: "2026.01.15",
-      createdAt: "2026.01.15",
-      done: false,
-      ownerId: "smth",
-    },
-    "284ab172-2341-468a-a82d-d15738eb149b": {
-      id: "284ab172-2341-468a-a82d-d15738eb149b",
-      title: "Gift Ideas",
-      description: "Decide on and choose a birthday present for a friend.",
-      updatedAt: "2026.01.14",
-      createdAt: "2026.01.14",
-      done: false,
-      ownerId: "smth",
+      taskIds: [],
+      taskGroupIds: [],
     },
   },
   selectedProjectId: null,
+  taskGroupIds: [],
+  taskIds: [],
   addNewProject: (title, description) => {
     const newId = crypto.randomUUID()
     const newProject = {
@@ -44,6 +29,8 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
       done: false,
       ownerId: "smth",
+      taskIds: [],
+      taskGroupIds: [],
     }
     set(state => ({
       projectList: {
@@ -99,5 +86,23 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
     }
 
     return project
+  },
+
+  addNewTask: (projectId, taskId) => {
+    const project = get().projectList[projectId]
+
+    if (!project) {
+      return
+    }
+
+    set(state => ({
+      projectList: {
+        ...state.projectList,
+        [projectId]: {
+          ...project,
+          taskIds: [...project.taskIds, taskId],
+        },
+      },
+    }))
   },
 }))
