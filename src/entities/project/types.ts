@@ -17,8 +17,6 @@ export interface ProjectStore {
     [id: Project["id"]]: Project
   }
   selectedProjectId: string | null
-  taskGroupIds: string[]
-  taskIds: string[]
   addNewProject: (
     title: Project["title"],
     description: Project["description"],
@@ -29,7 +27,7 @@ export interface ProjectStore {
   updateProjectData: (project: Project) => void
   getProjectById: (id: Project["id"]) => Project | undefined
 
-  addNewTask: (
+  addNewTaskId: (
     projectId: Project["id"],
     taskId: Task["id"],
     //groupid

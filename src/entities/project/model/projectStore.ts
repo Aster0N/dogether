@@ -88,7 +88,7 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
     return project
   },
 
-  addNewTask: (projectId, taskId) => {
+  addNewTaskId: (projectId, taskId) => {
     const project = get().projectList[projectId]
 
     if (!project) {

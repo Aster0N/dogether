@@ -1,3 +1,4 @@
+import { useProjectStore } from "@/entities/project"
 import { create } from "zustand"
 import type { Task, TaskStore } from "../types"
 
@@ -22,5 +23,6 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         [newId]: newTask,
       },
     }))
+    useProjectStore.getState().addNewTaskId(projectId, newId)
   },
 }))

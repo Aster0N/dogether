@@ -1,4 +1,5 @@
 import { useProjectStore } from "@/entities/project"
+import { useTaskStore } from "@/entities/task"
 import { EditableBlock } from "@/shared"
 import type { ChangeEvent } from "react"
 import { useParams } from "react-router-dom"
@@ -6,6 +7,7 @@ import cl from "./ProjectById.module.scss"
 
 const ProjectById = () => {
   const { projectId } = useParams()
+  const { addNewTask, taskList } = useTaskStore()
   const {
     getProjectById,
     selectedProjectId,
@@ -35,6 +37,12 @@ const ProjectById = () => {
     updateProjectData(updatedProject)
   }
 
+  const addTask = () => {
+    let title = prompt() ?? ""
+    let description = prompt() ?? ""
+    addNewTask(projectId, title, description)
+  }
+
   return (
     <>
       <h4 className={cl.title}>{project.title}</h4>
@@ -50,6 +58,13 @@ const ProjectById = () => {
             />
           )}
         </div>
+        <button onClick={addTask}>new task</button>
+        {getProjectById(projectId)?.taskIds.map(taskId => (
+          <div key={taskId}>
+            <span>{taskList[taskId].title}</span>
+            <span>{taskList[taskId].description}</span>
+          </div>
+        ))}
       </div>
     </>
   )
