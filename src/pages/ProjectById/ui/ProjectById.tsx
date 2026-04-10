@@ -1,5 +1,4 @@
 import { useProjectStore } from "@/entities/project"
-import { useTaskStore } from "@/entities/task"
 import { EditableBlock } from "@/shared"
 import type { ChangeEvent } from "react"
 import { useParams } from "react-router-dom"
@@ -7,12 +6,12 @@ import cl from "./ProjectById.module.scss"
 
 const ProjectById = () => {
   const { projectId } = useParams()
-  const { addNewTask, taskList } = useTaskStore()
   const {
     getProjectById,
     selectedProjectId,
     selectProject,
     updateProjectData,
+    addNewTask,
   } = useProjectStore()
 
   if (!projectId) {
@@ -59,10 +58,10 @@ const ProjectById = () => {
           )}
         </div>
         <button onClick={addTask}>new task</button>
-        {getProjectById(projectId)?.taskIds.map(taskId => (
+        {Object.entries(project.taskList).map(([taskId, task]) => (
           <div key={taskId}>
-            <span>{taskList[taskId].title}</span>
-            <span>{taskList[taskId].description}</span>
+            <span>{task.title}</span>
+            <span>{task.description}</span>
           </div>
         ))}
       </div>

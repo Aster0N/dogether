@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import type { ProjectStore } from "../types"
+import type { ProjectStore, Task } from "../types"
 
 export const useProjectStore = create<ProjectStore>((set, get) => ({
   projectList: {
@@ -12,13 +12,10 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       createdAt: "2026.01.17",
       done: false,
       ownerId: "smth",
-      taskIds: [],
-      taskGroupIds: [],
+      taskList: {},
     },
   },
   selectedProjectId: null,
-  taskGroupIds: [],
-  taskIds: [],
   addNewProject: (title, description) => {
     const newId = crypto.randomUUID()
     const newProject = {
@@ -29,8 +26,7 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
       done: false,
       ownerId: "smth",
-      taskIds: [],
-      taskGroupIds: [],
+      taskList: {},
     }
     set(state => ({
       projectList: {
@@ -88,11 +84,23 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
     return project
   },
 
-  addNewTaskId: (projectId, taskId) => {
+  addNewTask: (projectId, title, description) => {
     const project = get().projectList[projectId]
 
     if (!project) {
       return
+    }
+
+    const newId = crypto.randomUUID()
+    const newTask: Task = {
+      id: newId,
+      title,
+      description: description ?? "",
+      updatedAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+      createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+      done: false,
+      ownerId: "smth",
+      projectId: projectId,
     }
 
     set(state => ({
@@ -100,7 +108,10 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
         ...state.projectList,
         [projectId]: {
           ...project,
-          taskIds: [...project.taskIds, taskId],
+          taskList: {
+            ...project.taskList,
+            [newId]: newTask,
+          },
         },
       },
     }))
