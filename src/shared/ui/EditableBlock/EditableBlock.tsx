@@ -3,10 +3,10 @@ import { SquarePen } from "lucide-react"
 import { useEffect, useState, type FC } from "react"
 import cl from "./EditableBlock.module.scss"
 
-// type ChangeHandler = ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+type EditableElements = HTMLTextAreaElement | HTMLInputElement
 
 type ChangeHandlerWithId = (
-  event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  event: React.ChangeEvent<EditableElements>,
   elementId?: string,
 ) => void
 
@@ -18,6 +18,7 @@ interface EditableBlockProps {
   className?: string
   isTextArea?: boolean
   elementId?: string
+  isEditableInitial?: boolean
 }
 
 const EditableBlock: FC<EditableBlockProps> = ({
@@ -28,8 +29,9 @@ const EditableBlock: FC<EditableBlockProps> = ({
   isTextArea = false,
   name,
   elementId = null,
+  isEditableInitial = false,
 }) => {
-  const [isEditable, setIsEditable] = useState(false)
+  const [isEditable, setIsEditable] = useState(isEditableInitial)
   const [value, setValue] = useState("")
 
   const changeValue: ChangeHandlerWithId = e => {
@@ -44,8 +46,16 @@ const EditableBlock: FC<EditableBlockProps> = ({
     }
   }
 
+  const toggleEditByKeyPress = (
+    event: React.KeyboardEvent<EditableElements>,
+  ) => {
+    if (event.key === "Enter") {
+      toggleEditMode()
+    }
+  }
+
   useEffect(() => {
-    setIsEditable(false)
+    setIsEditable(isEditableInitial)
     setValue("")
   }, [...(resetValueOnDeps ?? [])])
 
@@ -62,7 +72,8 @@ const EditableBlock: FC<EditableBlockProps> = ({
               value={value}
               className={cl.editable_value}
               onChange={changeValue}
-              placeholder="type smth..."
+              onKeyDown={toggleEditByKeyPress}
+              placeholder={value ? value : "title"}
             />
           ) : (
             <input
@@ -70,7 +81,8 @@ const EditableBlock: FC<EditableBlockProps> = ({
               value={value}
               className={cl.editable_value}
               onChange={changeValue}
-              placeholder="type smth..."
+              onKeyDown={toggleEditByKeyPress}
+              placeholder={value ? value : "title"}
             ></input>
           )
         ) : (

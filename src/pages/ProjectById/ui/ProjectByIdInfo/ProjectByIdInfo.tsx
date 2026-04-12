@@ -10,7 +10,9 @@ type ProjectByIdInfo = {
 
 export const ProjectByIdInfo: FC<ProjectByIdInfo> = ({ project }) => {
   const { updateProjectData } = useProjectStore()
-  const onDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onDescriptionChange = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => {
     const updatedProject = {
       ...project,
       description: e.target.value,
@@ -21,15 +23,13 @@ export const ProjectByIdInfo: FC<ProjectByIdInfo> = ({ project }) => {
   return (
     <div className={cl.info_header_wrapper}>
       <div className={cl.description_wrapper}>
-        {project.description && (
-          <EditableBlock
-            trackedValue={project.description}
-            className={cl.description}
-            onChange={onDescriptionChange}
-            isTextArea
-            name="descriptionInfo"
-          />
-        )}
+        <EditableBlock
+          trackedValue={project.description}
+          className={cl.description}
+          onChange={onDescriptionChange}
+          isTextArea
+          name="descriptionInfo"
+        />
       </div>
     </div>
   )

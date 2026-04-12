@@ -35,6 +35,7 @@ export const ProjectTasksList: FC<ProjectTasksList> = ({ project }) => {
             onChange={onTaskTitleChange}
             name={`task-${taskId}_title`}
             elementId={taskId}
+            isEditableInitial
           />
         </div>
       ))}

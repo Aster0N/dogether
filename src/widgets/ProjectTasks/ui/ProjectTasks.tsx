@@ -14,9 +14,7 @@ export const ProjectTasks: FC<ProjectTasks> = ({ project }) => {
   const { addNewTask } = useProjectStore()
 
   const addTask = () => {
-    let title = prompt() ?? ""
-    let description = prompt() ?? ""
-    addNewTask(project.id, title, description)
+    addNewTask(project.id)
   }
 
   return (

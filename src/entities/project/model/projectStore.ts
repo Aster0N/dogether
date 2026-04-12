@@ -83,7 +83,7 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
 
     return project
   },
-  addNewTask: (projectId, title, description) => {
+  addNewTask: (projectId, title = "", description = "") => {
     const project = get().projectList[projectId]
 
     if (!project) {
@@ -94,7 +94,7 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
     const newTask: Task = {
       id: newId,
       title,
-      description: description ?? "",
+      description,
       updatedAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
       createdAt: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
       done: false,

@@ -38,7 +38,7 @@ export interface ProjectStore {
   getProjectById: (id: Project["id"]) => Project | undefined
   addNewTask: (
     projectId: Project["id"],
-    title: Task["title"],
+    title?: Task["title"],
     description?: Task["description"],
   ) => void
   getTaskById: (
