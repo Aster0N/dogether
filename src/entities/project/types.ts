@@ -36,10 +36,18 @@ export interface ProjectStore {
   deselectProject: () => void
   updateProjectData: (project: Project) => void
   getProjectById: (id: Project["id"]) => Project | undefined
-
   addNewTask: (
-    projectId: Task["projectId"],
+    projectId: Project["id"],
     title: Task["title"],
     description?: Task["description"],
+  ) => void
+  getTaskById: (
+    projectId: Project["id"],
+    taskId: Task["id"],
+  ) => Task | undefined
+  updateTaskById: (
+    projectId: Project["id"],
+    taskId: Task["id"],
+    taskDetails: Task,
   ) => void
 }

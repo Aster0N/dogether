@@ -83,7 +83,6 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
 
     return project
   },
-
   addNewTask: (projectId, title, description) => {
     const project = get().projectList[projectId]
 
@@ -111,6 +110,39 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
           taskList: {
             ...project.taskList,
             [newId]: newTask,
+          },
+        },
+      },
+    }))
+  },
+  getTaskById: (projectId, taskId) => {
+    const project = get().projectList[projectId]
+
+    if (!project) {
+      return
+    }
+
+    const task = project.taskList[taskId]
+
+    return task
+  },
+  updateTaskById(projectId, taskId, taskDetails) {
+    const project = get().projectList[projectId]
+
+    if (!project) {
+      return
+    }
+
+    set(state => ({
+      projectList: {
+        ...state.projectList,
+        [projectId]: {
+          ...project,
+          taskList: {
+            ...project.taskList,
+            [taskId]: {
+              ...taskDetails,
+            },
           },
         },
       },

@@ -1,17 +1,23 @@
 import { Button, TextArea } from "@/shared"
 import { SquarePen } from "lucide-react"
-import { useEffect, useState, type ChangeEventHandler, type FC } from "react"
+import { useEffect, useState, type FC } from "react"
 import cl from "./EditableBlock.module.scss"
 
-type ChangeHandler = ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+// type ChangeHandler = ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+
+type ChangeHandlerWithId = (
+  event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  elementId?: string,
+) => void
 
 interface EditableBlockProps {
   trackedValue: string
-  onChange: ChangeHandler
+  onChange: ChangeHandlerWithId
+  name: string
   resetValueOnDeps?: unknown[] // ? questionable solution
   className?: string
   isTextArea?: boolean
-  name: string
+  elementId?: string
 }
 
 const EditableBlock: FC<EditableBlockProps> = ({
@@ -21,13 +27,14 @@ const EditableBlock: FC<EditableBlockProps> = ({
   className,
   isTextArea = false,
   name,
+  elementId = null,
 }) => {
   const [isEditable, setIsEditable] = useState(false)
   const [value, setValue] = useState("")
 
-  const changeValue: ChangeHandler = e => {
+  const changeValue: ChangeHandlerWithId = e => {
     setValue(e.target.value)
-    onChange(e)
+    elementId ? onChange(e, elementId) : onChange(e)
   }
 
   const toggleEditMode = () => {
@@ -44,7 +51,10 @@ const EditableBlock: FC<EditableBlockProps> = ({
 
   return (
     <div className={`${cl.editable_block_wrapper} _space-between`}>
-      <div className={`${className ? className : ""}`}>
+      <div
+        className={`${className ? className : ""}`}
+        onDoubleClick={toggleEditMode}
+      >
         {isEditable ? (
           isTextArea ? (
             <TextArea
