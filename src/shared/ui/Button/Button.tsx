@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { type FC, type ReactNode } from "react"
 import { useFormStatus } from "react-dom"
 import cl from "./Button.module.scss"
@@ -8,6 +9,7 @@ interface Button extends React.HTMLProps<HTMLButtonElement> {
   dark?: boolean
   inline?: boolean
   danger?: boolean
+  hint?: boolean
   type?: "submit" | "reset" | "button" | undefined
   onClick?: () => void
   className?: string
@@ -19,6 +21,7 @@ const Button: FC<Button> = ({
   dark = false,
   inline = false,
   danger = false,
+  hint = false,
   onClick,
   type = "button",
   className,
@@ -28,9 +31,15 @@ const Button: FC<Button> = ({
 
   return (
     <button
-      className={`${cl.button} ${big ? cl.btn_large : cl.btn_small} ${
-        dark ? cl.btn_dark : ""
-      } ${inline ? cl.btn_inline : ""} ${danger ? cl.btn_danger : ""} ${className ? className : ""}`}
+      className={clsx(
+        cl.button,
+        className,
+        big ? cl.btn_large : cl.btn_small,
+        dark && cl.btn_dark,
+        inline && cl.btn_inline,
+        danger && cl.btn_danger,
+        hint && cl.btn_hint,
+      )}
       onClick={onClick}
       type={type}
       disabled={formStatus.pending}

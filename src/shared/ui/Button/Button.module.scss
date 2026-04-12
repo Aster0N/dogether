@@ -75,4 +75,17 @@
       outline: 1px solid $red;
     }
   }
+
+  &.btn_hint {
+    color: rgba($primary, 0.7);
+    background: none;
+    border: 1px solid transparent;
+    outline: none;
+    gap: 5px;
+
+    &:hover {
+      color: $primary;
+      border: 1px solid rgba($primary, 0.7);
+    }
+  }
 }
